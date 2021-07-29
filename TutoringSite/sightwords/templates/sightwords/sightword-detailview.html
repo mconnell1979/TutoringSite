@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Sightword - DetailView {% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/lessonplans.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<p>{{ words.name }}</p>
+
+{% endblock %}

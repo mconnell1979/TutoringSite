@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Sight Words - Index {% endblock %}
+
+{% block content %}
+<h1>Sight Words Set List</h1>
+    <ul class="list-group">
+        {% for sightword in words %}
+            <a class="text-dark" href="/sightwords/{{sightword.id}}"> {{ sightword.id }} - Set:{{ sightword.orig_set }} #{{ sightword.orig_num }} - {{ sightword.name }}</a>
+        {% endfor %}
+    </ul>
+{% endblock %}

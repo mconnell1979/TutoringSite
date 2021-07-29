@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block meta_description %} Online Tutoring - Specializing in struggling readers with dyslexia and other learning differences.  Our goal is to get students reading fluently on grade level and beyond. {% endblock %}
+
+{% block content %}
+    <h1>Home Page!</h1>
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+        </tr>
+    </table>
+    <input type="submit" value="login">
+    <input type="hidden" name="next" value="{{ next }}">
+</form>
+{% endblock %}

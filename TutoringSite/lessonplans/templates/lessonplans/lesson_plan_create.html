@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %} Lessons - Create {% endblock %}
+
+{% block content %}
+    <h1>Lesson Plan Create</h1>
+    <form method="POST"> {% csrf_token %}
+        <p>
+            <label>Student</label>
+            {{ form.student }}
+        </p>
+
+        <p>
+            <div>
+                <label>Sight Words</label>
+                {{ form.sight_word_list }}
+                <label>Syllable Words</label>
+                {{ form.syllable_word_list }}
+            </div>
+        </p>
+        <p>
+            <label>Air Write Words</label>
+            {{ form.air_write_words }}
+        </p>
+        <p>
+            <label>Notes</label>
+            {{ form.note }}
+        </p>
+
+
+        <input type = 'submit' value = 'Save'/>
+    </form>
+
+{% endblock %}

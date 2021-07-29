@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Sight Word List</h1>
+
+    <ul class="list-group">
+        {% for sightword in words %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="col-lg-3">
+                    <span class="badge bg-primary rounded-pill">{{ sightword.order }} </span>
+                     &nbsp {{ sightword.name }} &nbsp &nbsp &nbsp &nbsp
+                    <span class="badge bg-primary rounded-pill">
+                        Set {{ sightword.orig_set }} &nbsp #{{ sightword.orig_num }}</span>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

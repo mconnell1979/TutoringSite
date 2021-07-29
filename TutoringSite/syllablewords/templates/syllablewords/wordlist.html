@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Syllable Word List</h1>
+
+    <ul class="list-group">
+        {% for word in words %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="col-lg-3">
+                    <span class="badge bg-primary rounded-pill">{{ word.order }} </span>
+                     &nbsp {{ word.name }} &nbsp &nbsp &nbsp &nbsp
+                    <span class="badge bg-primary rounded-pill">
+                        Box {{ word.orig_box }} &nbsp Set {{ word.orig_set }} &nbsp #{{ word.orig_num }}</span>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
