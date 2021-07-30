@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-#WTF
+
 urlpatterns = [
     path('', include('pages.urls')),
     path('', include('django.contrib.auth.urls')),

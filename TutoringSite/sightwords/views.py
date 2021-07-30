@@ -1,6 +1,4 @@
-from django.http import HttpResponse
 from django.core.paginator import Paginator
-from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
@@ -8,15 +6,14 @@ from .models import SightWord
 
 
 class SightwordIndexView(ListView):
-    template_name = "sightwords/sightword-index.html"
+    template_name = "sightwords/index.html"
     model = SightWord
     context_object_name = 'words'
     queryset = SightWord.objects.filter(orig_num=1)
-    print(queryset)
 
 
 class SightwordSetListView(ListView):
-    template_name = "sightwords/sightword-setlist.html"
+    template_name = "sightwords/setlist.html"
     model = SightWord
     context_object_name = 'words'
 
@@ -25,7 +22,7 @@ class SightwordSetListView(ListView):
 
 
 class SightwordDetailView(LoginRequiredMixin, DetailView):
-    template_name = "sightwords/sightword-detailview.html"
+    template_name = "sightwords/detailview.html"
     context_object_name = 'words'
     login_url = '/login/'
 
@@ -38,6 +35,13 @@ class SightwordDetailView(LoginRequiredMixin, DetailView):
         # Returns a temporary object of a parent class when used
         context = super().get_context_data(**kwargs)
         return context
+
+    def get_related_activities(self):
+        queryset = self.object.activity_rel.all()
+        paginator = Paginator(queryset, 1)  # paginate_by
+        page = self.request.GET.get('page')
+        activities = paginator.get_page(page)
+        return activities
 
 # Delete All These Function Based Views Below
 # def index(request):
