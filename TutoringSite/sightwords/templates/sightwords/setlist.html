@@ -7,7 +7,6 @@
     <ul class="list-group">
         {% for sightword in words %}
             <a class="text-dark" href="/sightwords/{{sightword.id}}"> {{ sightword.id }} - Set:{{ sightword.orig_set }} #{{ sightword.orig_num }} - {{ sightword.name }}</a>
-        <a class="text-dark" href="/sightwords/{{sightword.id}}+1"> {{ sightword.id }} - Set:{{ sightword.orig_set }} #{{ sightword.orig_num }} - {{ sightword.name }}</a>
         {% endfor %}
     </ul>
 {% endblock %}

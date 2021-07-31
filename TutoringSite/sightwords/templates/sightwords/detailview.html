@@ -8,6 +8,14 @@
 
 {% block content %}
 
-<p class="text-center" style="font-size:20rem;" >{{ words.name }}</p>
+<a class="icon-camera-retro" style="font-size:48px;color:#5555;" data-toggle="button" aria-pressed="false"
+   autocomplete="off" -
+   onclick="changeVisibility()">
+</a>
+<a class="icon-chevron-sign-left" href="/sightwords/{{prev_url.id}}" style="font-size:48px;color:#5555"
+   role="button"> </a>
+<a class="icon-chevron-sign-right" href="/sightwords/{{next_url.id}}" style="font-size:48px;color:#5555"
+   role="button"> </a>
+<p class="text-center" style="font-size:20rem;"> {{ words.name }} </p>
 
 {% endblock %}

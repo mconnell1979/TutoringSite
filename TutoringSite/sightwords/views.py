@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
@@ -34,14 +35,18 @@ class SightwordDetailView(LoginRequiredMixin, DetailView):
         # super() = Function used to give access to the methods of a parent class.
         # Returns a temporary object of a parent class when used
         context = super().get_context_data(**kwargs)
+        try:
+            context['prev_url'] = SightWord.objects.get(id=int(self.kwargs.get("id")) - 1)
+        except ObjectDoesNotExist:
+            context['prev_url'] = None
+
+        try:
+            context['next_url'] = SightWord.objects.get(id=int(self.kwargs.get("id")) + 1)
+        except ObjectDoesNotExist:
+            context['next_url'] = None
+
         return context
 
-    def get_related_activities(self):
-        queryset = self.object.activity_rel.all()
-        paginator = Paginator(queryset, 1)  # paginate_by
-        page = self.request.GET.get('page')
-        activities = paginator.get_page(page)
-        return activities
 
 # Delete All These Function Based Views Below
 # def index(request):
