@@ -3,10 +3,20 @@
 {% block title %} Sight Words - Index {% endblock %}
 
 {% block content %}
-<h1>Sight Words</h1>
-    <ul class="list-group">
-        {% for sightword in words %}
-            <a class="text-dark" href="sightwordSetList/{{sightword.orig_set}}"> {{ sightword.id }} - Set:{{ sightword.orig_set }} - {{ sightword.name }}</a>
-        {% endfor %}
-    </ul>
+<h1>Sight Word Index</h1>
+
+<ul class="list-group">
+    {% for sightword in words %}
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+            <div class="fw-bold">
+                <a class="text-dark" href="sightwordSetList/{{sightword.orig_set}}">Set: {{ sightword.orig_set }}</a>
+            </div>
+            <a class="text-dark" href="/sightwords/{{sightword.id}}"> {{ sightword.name }}</a>
+        </div>
+        <span class="badge bg-primary rounded-pill">{{ sightword.id }}</span>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
+

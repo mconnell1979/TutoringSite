@@ -3,7 +3,7 @@
 {% block title %} Sightword - DetailView {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/lessonplans.js' %}"></script>
+<script src="{% static 'js/sightworddetail.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -16,6 +16,7 @@
    role="button"> </a>
 <a class="icon-chevron-sign-right" href="/sightwords/{{next_url.id}}" style="font-size:48px;color:#5555"
    role="button"> </a>
-<p class="text-center" style="font-size:20rem;"> {{ words.name }} </p>
-
+<div class="carousel-inner" id="mainWord">
+    <p class="text-center" style="font-size:20rem;"> {{ words.name }} </p>
+</div>
 {% endblock %}
