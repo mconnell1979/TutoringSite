@@ -9,11 +9,10 @@
     {% for word in words %}
     <a href="SyllableWordBookList/{{word.orig_box}}/{{word.orig_book}}" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Box: {{ word.orig_box }}, Book {{ word.orig_book }}</h5>
+            <h5 class="mb-1">Box {{ word.orig_box }} Book {{ word.orig_book }}</h5>
             <small>{{ word.id }}</small>
         </div>
         <p class="mb-1">Syllable Type: {{ word.type }}</p>
-        <small>{{ word.name }}</small>
     </a>
     {% endfor %}
 </div>

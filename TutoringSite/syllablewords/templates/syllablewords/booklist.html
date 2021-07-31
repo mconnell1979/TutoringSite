@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Sight Words - Index {% endblock %}
+{% block title %} Sight Words - Box {{ words.0.orig_box }} Book {{ words.0.orig_book }}  {% endblock %}
 
 {% block content %}
 <h1>Syllable Words Box {{ words.0.orig_box }} Book {{ words.0.orig_book }}</h1>
 
-<ul class="list-group">
+<div class="list-group">
     {% for word in words %}
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-            <div class="fw-bold">
-                <a class="text-dark" href="/syllablewords/{{word.id}}">#{{ word.orig_num }} - {{ word.name }} </a>
-            </div>
+    <a href="/syllablewords/{{word.id}}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ word.name }}</h5>
+            <small>{{ word.id }}</small>
         </div>
-        <span class="badge bg-primary rounded-pill">{{ word.id }}</span>
-    </li>
+        <p class="mb-1">Set {{ word.orig_box }} Book {{ word.orig_book }} # {{ word.orig_num }}</p>
+        <small>Syllable Type: {{ word.type }}</small>
+    </a>
     {% endfor %}
-</ul>
+</div>
+
 {% endblock %}

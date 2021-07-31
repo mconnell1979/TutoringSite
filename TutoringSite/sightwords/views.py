@@ -13,7 +13,7 @@ class SightwordIndexView(ListView):
     queryset = SightWord.objects.filter(orig_num=1)
 
 
-class SightwordSetListView(ListView):
+class SightWordSetListView(ListView):
     template_name = "sightwords/setlist.html"
     model = SightWord
     context_object_name = 'words'
