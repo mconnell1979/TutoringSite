@@ -1,19 +1,21 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import SyllableWord
 
 
-class SyllableWordIndexView(ListView):
+class SyllableWordIndexView(LoginRequiredMixin, ListView):
     template_name = "syllablewords/index.html"
+    login_url = '/login/'
     model = SyllableWord
     context_object_name = 'words'
     queryset = SyllableWord.objects.filter(orig_num=1)
 
 
-class SyllableWordBookListView(ListView):
+class SyllableWordBookListView(LoginRequiredMixin, ListView):
     template_name = "syllablewords/booklist.html"
+    login_url = '/login/'
     model = SyllableWord
     context_object_name = 'words'
 

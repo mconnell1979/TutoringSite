@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'sightwords.apps.SightwordsConfig',
     'syllablewords.apps.SyllablewordsConfig',
+    'hackablesheets.apps.HackablesheetsConfig',
     'students.apps.StudentsConfig',
     'lessonplans.apps.LessonplansConfig',
 ]

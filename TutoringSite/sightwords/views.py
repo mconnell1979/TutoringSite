@@ -6,17 +6,18 @@ from django.shortcuts import render, get_object_or_404
 from .models import SightWord
 
 
-class SightwordIndexView(ListView):
+class SightwordIndexView(LoginRequiredMixin, ListView):
     template_name = "sightwords/index.html"
     model = SightWord
     context_object_name = 'words'
     queryset = SightWord.objects.filter(orig_num=1)
+    login_url = '/login/'
 
-
-class SightWordSetListView(ListView):
+class SightWordSetListView(LoginRequiredMixin, ListView):
     template_name = "sightwords/setlist.html"
     model = SightWord
     context_object_name = 'words'
+    login_url = '/login/'
 
     def get_queryset(self, *args, **kwargs):
         return SightWord.objects.filter(orig_set=self.kwargs.get('orig_set'))

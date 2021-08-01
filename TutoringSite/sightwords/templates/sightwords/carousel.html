@@ -10,13 +10,12 @@
     <span class="step-links">
 
         {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}" class="icon-chevron-sign-left" style="font-size:48px;color:#5555; role="button"
+            <a href="?page={{ page_obj.previous_page_number }}" class="icon-chevron-sign-left" style="font-size:48px;color:#5555"; role="button"
                aria-pressed="true"></a>
         {% endif %}
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}" class="icon-chevron-sign-right" style="font-size:48px;color:#5555; role="button"
-               aria-pressed="true"></a>
+            <a href="?page={{ page_obj.next_page_number }}" class="icon-chevron-sign-right" Style="font-size:48px;color:#5555"; role="button" aria-pressed="true"> </a>
         {% endif %}
         <span class="current" >
             ({{ page_obj.number }} of {{ page_obj.paginator.num_pages }})

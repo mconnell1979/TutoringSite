@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class SightWord(models.Model):
     name = models.CharField(max_length=25, unique=True)
     order = models.IntegerField(unique=True)
