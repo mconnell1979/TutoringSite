@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('sightwords/', include('sightwords.urls')),
     path('syllablewords/', include('syllablewords.urls')),
+    path('hackablesheets/', include('hackablesheets.urls')),
     path('lessonplans/', include('lessonplans.urls')),
 ]
