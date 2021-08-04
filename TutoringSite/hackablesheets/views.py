@@ -13,9 +13,39 @@ class HackableBookIndexView(LoginRequiredMixin, ListView):
     login_url = '/login/'
 
 
-class HackableWordSetIndexView(LoginRequiredMixin, ListView):
-    template_name = "hackablesheets/index.html"
+class HackableWordSheetIndexView(LoginRequiredMixin, ListView):
+    template_name = "hackablesheets/wordsheetindex.html"
+    login_url = '/login/'
     model = HackableWordSet
     context_object_name = 'sheets'
-    queryset = HackableWordSet.objects.filter(orig_num=1)
+
+    def get_queryset(self, *args, **kwargs):
+        return HackableWordSet.objects.filter(book__orig_book=self.kwargs.get('orig_book'))
+
+
+class HackableWordSheetDetailView(LoginRequiredMixin, DetailView):
+    template_name = "hackablesheets/wordsetdetail.html"
+    context_object_name = 'sheet'
     login_url = '/login/'
+
+    def get_object(self, **kwargs):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(HackableWordSet, id=_id)
+
+
+class HackableWordDetailView(LoginRequiredMixin, DetailView):
+    template_name = "hackablesheets/worddetail.html"
+    context_object_name = 'sheet'
+    login_url = '/login/'
+
+    def get_object(self, **kwargs):
+        print('hope')
+        print(self.kwargs.get("wordnum"))
+        _id = self.kwargs.get("id")
+        return get_object_or_404(HackableWordSet, id=_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['wordnum'] = self.kwargs.get("wordnum")
+        context['hackword'] = self.kwargs.get("hackword")
+        return context

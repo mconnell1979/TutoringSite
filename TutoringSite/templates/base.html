@@ -46,11 +46,11 @@
 
             <a class="navbar-brand" href="{% url 'sightwords:SightwordsIndex' %}">Sight Words</a>
 
-            <a class="navbar-brand" href="//127.0.0.1:8000/syllablewords/">Syllable Words</a>
+            <a class="navbar-brand" href="{% url 'syllablewords:SyllableWordsIndex' %}">Syllable Words</a>
 
             <a class="navbar-brand" href="{% url 'hackablesheets:HackableBookIndex' %}">Hackables</a>
 
-            <a class="navbar-brand" href="//127.0.0.1:8000/lessonplans">Lesson Plans</a>
+            <a class="navbar-brand" href="{% url 'lessonplans:LessonPlanIndex' %}">Lessons</a>
 
             <div class="flex-grow-1"></div>
             <ul class="nav">

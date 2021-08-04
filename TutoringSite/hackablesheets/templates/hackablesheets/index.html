@@ -5,30 +5,30 @@
 {% block content %}
 <h1>Hackable Book Index</h1>
 
-    <div class="container">
-        <div class="row">
-    {% for book in books %}
-            <div class="col-lg-6 mb-4">
-                <div class="card">
-                    <img class="card-img-top" src="" alt="">
+<div class="container">
+    <div class="row">
+        {% for book in books %}
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="" alt="">
 
-                    <div class="card-body">
-                        <h5 class="card-title">Book {{ book.orig_book }}</h5>
-                        <p class="card-text">
-                            {{ book.title }}
-                        </p>
-
-                        <a href="#" class="btn btn-outline-primary btn-sm">
-                            Hackables
-                        </a>
-                        <a href="#" class="btn btn-outline-primary btn-sm">
-                            Sentences
-                        </a>
-                    </div>
+                <div class="card-body">
+                    <h5 class="card-title">Book {{ book.orig_book }}</h5>
+                    <p class="card-text">
+                        {{ book.title }}
+                    </p>
+                    <a href="{% url 'hackablesheets:HackableWordSheetIndex' book.orig_book %}"
+                       class="btn btn-outline-primary btn-sm">
+                        Hackables
+                    </a>
+                    <a href="#" class="btn btn-outline-primary btn-sm">
+                        Sentences
+                    </a>
                 </div>
             </div>
-    {% endfor %}
         </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}
 
