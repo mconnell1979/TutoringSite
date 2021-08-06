@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Hackable Words - Book {{ sheets.0.book.orig_book }} List {% endblock %}
+
+{% block content %}
+<h1>Hackable Sentence Book {{ sheets.0.book.orig_book }} List  </h1>
+
+<div class="list-group">
+    {% for sheet in sheets %}
+    <a href="{% url 'hackablesheets:HackableSentenceSheet' sheet.id %}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ sheet.title }}</h5>
+            <small>{{ sheet.id }}</small>
+        </div>
+        <p class="mb-1">{{ sheet.subtitle }}</p>
+        <small>Sheet {{ sheet.orig_num }}</small>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

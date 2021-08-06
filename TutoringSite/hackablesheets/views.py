@@ -2,7 +2,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
-from .models import HackableWordSet, HackableBook
+from .models import HackableWordSet, HackableBook, HackableSentenceSet
 
 
 class HackableBookIndexView(LoginRequiredMixin, ListView):
@@ -39,8 +39,6 @@ class HackableWordDetailView(LoginRequiredMixin, DetailView):
     login_url = '/login/'
 
     def get_object(self, **kwargs):
-        print('hope')
-        print(self.kwargs.get("wordnum"))
         _id = self.kwargs.get("id")
         return get_object_or_404(HackableWordSet, id=_id)
 
@@ -49,3 +47,23 @@ class HackableWordDetailView(LoginRequiredMixin, DetailView):
         context['wordnum'] = self.kwargs.get("wordnum")
         context['hackword'] = self.kwargs.get("hackword")
         return context
+
+
+class HackableSentenceSheetIndexView(LoginRequiredMixin, ListView):
+    template_name = "hackablesheets/sentencesheetindex.html"
+    login_url = '/login/'
+    model = HackableSentenceSet
+    context_object_name = 'sheets'
+
+    def get_queryset(self, *args, **kwargs):
+        return HackableWordSet.objects.filter(book__orig_book=self.kwargs.get('orig_book'))
+
+
+class HackableSentenceSheetDetailView(LoginRequiredMixin, DetailView):
+    template_name = "hackablesheets/sentencesetdetail.html"
+    context_object_name = 'sheet'
+    login_url = '/login/'
+
+    def get_object(self, **kwargs):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(HackableSentenceSet, id=_id)

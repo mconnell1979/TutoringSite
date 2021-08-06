@@ -11,7 +11,8 @@ urlpatterns = [
          name='HackableWordSheet'),
     path('Word/<int:id>/<int:wordnum>/<str:hackword>', views.HackableWordDetailView.as_view(),
          name='HackableWord'),
-    # path('WordSetIndex/<int:orig_set>', views.HackableWordSetIndexView.as_view(), name='HackableWordSetIndex'),
-    # path('SightWordSetList/<int:orig_set>', views.HackableWordSetIndexView.as_view(), name='HackableWordSetIndex'),
-    # path('<int:id>/', views.SightwordDetailView.as_view(), name='Detail'),
+    path('SentenceSheetList/<int:orig_book>', views.HackableSentenceSheetIndexView.as_view(),
+         name='HackableSentenceSheetIndex'),
+    path('SentenceSheet/<int:id>', views.HackableSentenceSheetDetailView.as_view(),
+         name='HackableSentenceSheet'),
 ]
