@@ -15,3 +15,29 @@ class SyllableWord(models.Model):
 
     def __repr__(self):
         return '{self.__class__.__name__}(id={self.id}, {self.type}'.format(self=self)
+
+
+class MultiSyllableWord(models.Model):
+    name = models.CharField(max_length=15)
+    order = models.IntegerField(unique=True)
+    type = models.CharField(max_length=15)
+
+    def __str__(self):
+        return "%s %s %s %s" % (
+        '#', self.order, '-', self.name)
+
+    def __repr__(self):
+        return '{self.__class__.__name__}(id={self.id}, {self.type}'.format(self=self)
+
+
+class Affix(models.Model):
+    name = models.CharField(max_length=15)
+    order = models.IntegerField(unique=True)
+    type = models.CharField(max_length=15)
+
+    def __str__(self):
+        return "%s %s %s %s" % (
+        '#', self.order, '-', self.name)
+
+    def __repr__(self):
+        return '{self.__class__.__name__}(id={self.id}, {self.type}'.format(self=self)
