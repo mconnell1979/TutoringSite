@@ -14,7 +14,7 @@ class HackableBook(models.Model):
 
 class HackableWordSet(models.Model):
     book = models.ForeignKey(HackableBook, on_delete=models.CASCADE)
-    title = models.CharField(max_length=60, help_text="Sheet Title - i.e. CCV")
+    title = models.CharField(max_length=60, blank=True,  help_text="Sheet Title - i.e. CCV")
     subtitle = models.CharField(max_length=60, blank=True, help_text="i.e. some easy initial blends")
     note_top = models.CharField(max_length=100, blank=True, help_text="i.e. Finger Break and Read")
     note_bottom = models.CharField(max_length=500, blank=True, help_text="i.e. Remember: Try to start a syllable...")
@@ -50,7 +50,7 @@ class HackableWordSet(models.Model):
 
 class HackableSentenceSet(models.Model):
     book = models.ForeignKey(HackableBook, on_delete=models.CASCADE)
-    title = models.CharField(max_length=60, help_text="Sheet Title - i.e. CCV")
+    title = models.CharField(max_length=60, blank=True, help_text="Sheet Title - i.e. CCV")
     subtitle = models.CharField(max_length=60, blank=True, help_text="i.e. some easy initial blends")
     note_top = models.CharField(max_length=100, blank=True, help_text="i.e. Finger Break and Read")
     note_bottom = models.CharField(max_length=500, blank=True,

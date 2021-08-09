@@ -3,7 +3,8 @@
 {% block title %} Hackables - {{ sheet.title }} {% endblock %}
 
 {% block content %}
-<p>Hackable Sentence Sheet</p>
+<i class="icon-chevron-sign-up" onclick="javascript:history.go(-1);" style="font-size:48px;color:#5555"
+   role="button"></i>
 <div class="container">
     <div class="row">
         <div class="row no-gutters">
@@ -44,4 +45,20 @@
         </div>
     </div>
 </div>
+
+<h3>1. <a href="{% url 'hackablesheets:HackableSentence' sheet.id 1 sheet.sentence1  %}">
+    {{ sheet.sentence1 }}
+</a> </h3>
+<h3>2. <a href="{% url 'hackablesheets:HackableSentence' sheet.id 2 sheet.sentence2  %}">
+    {{ sheet.sentence2 }}
+</a> </h3>
+<h3>3. <a href="{% url 'hackablesheets:HackableSentence' sheet.id 3 sheet.sentence3  %}">
+    {{ sheet.sentence3 }}
+</a> </h3>
+<h3>4. <a href="{% url 'hackablesheets:HackableSentence' sheet.id 4 sheet.sentence4  %}">
+    {{ sheet.sentence4 }}
+</a> </h3>
+
+
+
 {% endblock %}

@@ -7,12 +7,15 @@ icon-chevron-sign-left
 {% endblock %}
 
 {% block content %}
+<i class="icon-chevron-sign-up" onclick="javascript:history.go(-1);" style="font-size:48px;color:#5555"
+   role="button"></i>
+
 <a class="icon-camera-retro" style="font-size:48px;color:#5555;" data-toggle="button" aria-pressed="false"
-   autocomplete="off" -
-   onclick="changeVisibility()">
+   autocomplete="off"
+   onclick="changeVisibility()"
+   role="button">
 </a>
-<a class="icon-chevron-sign-up" href="{% url 'hackablesheets:HackableWordSheet' sheet.id %}" style="font-size:48px;color:#5555"
-   role="button"> </a>
+
 <div class="carousel-inner" id="mainWord">
     <p class="text-center" style="font-size:20rem;"> {{hackword}} </p>
 </div>

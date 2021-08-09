@@ -15,4 +15,6 @@ urlpatterns = [
          name='HackableSentenceSheetIndex'),
     path('SentenceSheet/<int:id>', views.HackableSentenceSheetDetailView.as_view(),
          name='HackableSentenceSheet'),
+    path('Sentence/<int:id>/<int:sentencenum>/<str:sentence>', views.HackableSentenceDetailView.as_view(),
+         name='HackableSentence'),
 ]
