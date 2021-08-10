@@ -10,8 +10,6 @@
         {% for book in books %}
         <div class="col-lg-6 mb-4">
             <div class="card">
-                <img class="card-img-top" src="" alt="">
-
                 <div class="card-body">
                     <h5 class="card-title">Book {{ book.orig_book }}</h5>
                     <p class="card-text">
@@ -21,7 +19,8 @@
                        class="btn btn-outline-primary btn-sm">
                         Hackables
                     </a>
-                    <a href="{% url 'hackablesheets:HackableSentenceSheetIndex' book.orig_book %}" class="btn btn-outline-primary btn-sm">
+                    <a href="{% url 'hackablesheets:HackableSentenceSheetIndex' book.orig_book %}"
+                       class="btn btn-outline-primary btn-sm">
                         Sentences
                     </a>
                 </div>

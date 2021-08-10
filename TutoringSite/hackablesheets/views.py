@@ -56,7 +56,7 @@ class HackableSentenceSheetIndexView(LoginRequiredMixin, ListView):
     context_object_name = 'sheets'
 
     def get_queryset(self, *args, **kwargs):
-        return HackableWordSet.objects.filter(book__orig_book=self.kwargs.get('orig_book'))
+        return HackableSentenceSet.objects.filter(book__orig_book=self.kwargs.get('orig_book'))
 
 
 class HackableSentenceSheetDetailView(LoginRequiredMixin, DetailView):
