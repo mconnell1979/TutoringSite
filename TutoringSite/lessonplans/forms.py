@@ -1,14 +1,22 @@
 from django import forms
+from django.forms import ModelForm
 from .models import LessonPlan
+
 
 class LessonPlanForm(forms.ModelForm):
     class Meta:
         model = LessonPlan
         fields = [
             'student',
+            'tutor',
+            'scheduled',
             'active',
             'sight_word_list',
             'syllable_word_list',
+            'multisyllable_word_list',
+            'affix_word_list',
+            'hackable_word_set_list',
+            'hackable_sentence_set_list',
             'air_write_words',
             'note',
         ]
@@ -16,6 +24,10 @@ class LessonPlanForm(forms.ModelForm):
         widgets = {
             'sight_word_list': forms.SelectMultiple(attrs={'size': 25}),
             'syllable_word_list': forms.SelectMultiple(attrs={'size': 25}),
+            'multisyllable_word_list': forms.SelectMultiple(attrs={'size': 25}),
+            'affix_word_list': forms.SelectMultiple(attrs={'size': 25}),
+            'hackable_word_set_list': forms.SelectMultiple(attrs={'size': 25}),
+            'hackable_sentence_set_list': forms.SelectMultiple(attrs={'size': 25}),
             'air_write_words': forms.Textarea(attrs={'class': 'textarea', 'rows': 2, 'placeholder': 'word_1, word_2, etc...'}),
             'note': forms.Textarea(attrs={'class': 'textarea', 'rows': 6, 'placeholder': 'notes...'}),
         }

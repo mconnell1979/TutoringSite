@@ -6,7 +6,7 @@ class HackableBook(models.Model):
     orig_book = models.IntegerField(help_text="original book # 1-6")
 
     def __str__(self):
-        return "%s %s %s %s" % ('Book #:', self.orig_book, 'Title', self.title)
+        return "%s %s %s %s" % ('Book', self.orig_book, 'Title', self.title)
 
     def __repr__(self):
         return '{self.__class__.__name__}(id={self.id}, {self.orig_book}'.format(self=self)
@@ -42,7 +42,7 @@ class HackableWordSet(models.Model):
     word20 = models.CharField(max_length=25, blank=True)
 
     def __str__(self):
-        return "%s %s %s %s %s %s" % ('Book:', self.book, '#', self.orig_num, 'Sheet id', self.order)
+        return "%s %s %s" % (self.book, '#', self.orig_num)
 
     def __repr__(self):
         return '{self.__class__.__name__}(id={self.id}, {self.book}, {self.orig_num},'.format(self=self)
@@ -73,7 +73,7 @@ class HackableSentenceSet(models.Model):
     sentence4 = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return "%s %s %s %s %s %s" % ('Book:', self.book, '#', self.orig_num, 'Sheet id', self.order)
+        return "%s %s %s" % (self.book, '#', self.orig_num)
 
     def __repr__(self):
         return '{self.__class__.__name__}(id={self.id}, {self.orig_book}, {self.orig_num},'.format(self=self)
