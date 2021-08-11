@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -9,6 +10,19 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from lessonplans.forms import LessonPlanForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
+
+class LessonIndexView(LoginRequiredMixin, ListView):
+    template_name = "lessonplans/index.html"
+    login_url = '/login/'
+    model = LessonPlan
+    context_object_name = 'lessons'
+
+    def get_queryset(self, *args, **kwargs):
+        print('wtf1')
+        print(self.request.user)
+        # return LessonPlan.objects.all()
+        print(LessonPlan.objects.filter(tutor=self.request.user))
+        return LessonPlan.objects.filter(tutor=self.request.user)
 
 class LessonplanListView(ListView):
     # template_name = "lessonplans/lesson_plan_listview.html"
