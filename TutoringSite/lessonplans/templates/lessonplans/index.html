@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Hackables - Index {% endblock %}
+{% block title %} Lesson Plan - Index {% endblock %}
 
 {% block content %}
-<h1>Lesson Plan Index</h1>
+<h1>Lessons Index</h1>
 
 <div class="container">
     <div class="row">
@@ -11,17 +11,21 @@
         <div class="col-lg-6 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Lesson {{ lesson.student }}</h5>
+                    <h5 class="card-title">Student({{ lesson.student.id }}): {{ lesson.student.first_name }}
+                        {{ lesson.student.last_name }}</h5>
                     <p class="card-text">
-                        {{ lesson.created }}
+                        Tutor: {{ lesson.tutor }}
+                    </p>
+                    <p class="card-text">
+                        Scheduled: {{ lesson.scheduled }}
                     </p>
                     <a href="#"
                        class="btn btn-outline-primary btn-sm">
-                        Hackables
+                        Summary
                     </a>
-                    <a href="#"
+                    <a href="{% url 'lessonplans:detail' lesson.id %}"
                        class="btn btn-outline-primary btn-sm">
-                        Sentences
+                        Lesson {{ lesson.id }}
                     </a>
                 </div>
             </div>

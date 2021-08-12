@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -17,12 +16,9 @@ class LessonIndexView(LoginRequiredMixin, ListView):
     model = LessonPlan
     context_object_name = 'lessons'
 
-    def get_queryset(self, *args, **kwargs):
-        print('wtf1')
-        print(self.request.user)
-        # return LessonPlan.objects.all()
-        print(LessonPlan.objects.filter(tutor=self.request.user))
+    def get_queryset(self):
         return LessonPlan.objects.filter(tutor=self.request.user)
+
 
 class LessonplanListView(ListView):
     # template_name = "lessonplans/lesson_plan_listview.html"
@@ -31,8 +27,25 @@ class LessonplanListView(ListView):
     context_object_name = 'lesson'
     print(model.student)
 
-
 class LessonplanDetailView(PermissionRequiredMixin, DetailView):
+    template_name = "lessonplans/lessonplan_detail.html"
+    context_object_name = 'lesson'
+    login_url = '/login/'
+    permission_required = ('lessonplans.add_lessonplan', 'lessonplans.view_lessonplan')
+
+    def get_object(self, **kwargs):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(LessonPlan, id=_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Note: Looks like personalizing the context data allows you to get more organized context.? \()/
+        context['sight_word_list'] = self.object.sight_word_list.all()
+        context['syllable_word_list'] = self.object.syllable_word_list.all()
+        return context
+
+
+class LessonplanDetailViewOld(PermissionRequiredMixin, DetailView):
     template_name = "lessonplans/lessonplan_detailview.html"
     context_object_name = 'lesson'
     login_url = '/login/'

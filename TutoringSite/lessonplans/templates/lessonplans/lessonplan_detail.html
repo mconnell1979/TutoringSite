@@ -1,8 +1,73 @@
 {% extends 'base.html' %}
-{% block title %} Lessons - Detail {% endblock %}
+{% load static %}
+{% block title %} Lesson - Detail {% endblock %}
 
 
 {% block content %}
-    <h1 id="testHeader2">Lesson Plan Template Delete - Detail View </h1>
+<h1 id="testHeader2">Lesson ({{ self.kwargs.id }}) Plan Template Delete - Detail View </h1>
+
+<div class="container">
+    <div class="row">
+
+        {% if sight_word_list.count > 0 %}
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Capture Words</h5>
+                    <p class="card-text">
+                   {% for sightword in sight_word_list %}
+                        {{ sightword.name }},
+                    {% endfor %}
+                    </p>
+                    <a href="#"
+                       class="btn btn-outline-primary btn-sm">
+                        Start Capture Words
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if syllable_word_list.count > 0 %}
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Syllable Words</h5>
+                    <p class="card-text">
+                   {% for syllableword in syllable_word_list %}
+                        {{ syllableword.name }},
+                    {% endfor %}
+                    </p>
+                    <a href="#"
+                       class="btn btn-outline-primary btn-sm">
+                        Start Syllable Words
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Book</h5>
+                    <p class="card-text">
+                        ok
+                    </p>
+                    <a href="#"
+                       class="btn btn-outline-primary btn-sm">
+                        Hackables
+                    </a>
+                    <a href="#"
+                       class="btn btn-outline-primary btn-sm">
+                        Sentences
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 {% endblock %}
