@@ -7,7 +7,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{% block meta_description %} Tutoring Online - Specializing in Reading for Dyslexia {% endblock %}">
+    <meta name="description"
+          content="{% block meta_description %} Tutoring Online - Specializing in Reading for Dyslexia {% endblock %}">
     <title> {% block title %} Tutoring Site {% endblock %} </title>
 
     <!-- Font Awesome -->
@@ -38,28 +39,35 @@
     {% endblock %}
 </head>
 
-<nav class="navbar navbar-dark bg-dark">
-    <!-- Navbar content -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
+<!-- Navbar content -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
 
-            <a class="navbar-brand" href="/">Home</a>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item {{ lessonplan_tab|yesno:'active,' }}">
+            <a class="nav-link" href="{% url 'lessonplans:LessonPlanIndex' %}">Lessons</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'sightwords:SightwordsIndex' %}">Sight Words</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'syllablewords:SyllableWordsIndex' %}">Syllable Words</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'hackablesheets:HackableBookIndex' %}">Hackables</a>
+        </li>
+    </ul>
 
-            <a class="navbar-brand" href="{% url 'sightwords:SightwordsIndex' %}">Sight Words</a>
-
-            <a class="navbar-brand" href="{% url 'syllablewords:SyllableWordsIndex' %}">Syllable Words</a>
-
-            <a class="navbar-brand" href="{% url 'hackablesheets:HackableBookIndex' %}">Hackables</a>
-
-            <a class="navbar-brand" href="{% url 'lessonplans:LessonPlanIndex' %}">Lessons</a>
-
-            <div class="flex-grow-1"></div>
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/login"> {{request.user.username}} </a>
-                </li>
-            </ul>
-    </nav>
+    <div class="flex-grow-1"></div>
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/login"> {{request.user.username}} </a>
+        </li>
+    </ul>
 </nav>
+
 
 <body>
 

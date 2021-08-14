@@ -19,6 +19,11 @@ class LessonIndexView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return LessonPlan.objects.filter(tutor=self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lessonplan_tab'] = True
+        return context
+
 
 class LessonplanListView(ListView):
     # template_name = "lessonplans/lesson_plan_listview.html"
@@ -30,18 +35,22 @@ class LessonplanListView(ListView):
 class LessonplanDetailView(PermissionRequiredMixin, DetailView):
     template_name = "lessonplans/lessonplan_detail.html"
     context_object_name = 'lesson'
+    model = LessonPlan
     login_url = '/login/'
     permission_required = ('lessonplans.add_lessonplan', 'lessonplans.view_lessonplan')
 
-    def get_object(self, **kwargs):
-        _id = self.kwargs.get("id")
-        return get_object_or_404(LessonPlan, id=_id)
+    # don't need this.  used int:pk in URLConf instead int:id
+    # def get_object(self, **kwargs):
+    #     _id = self.kwargs.get("id")
+    #     return get_object_or_404(LessonPlan, id=_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Note: Looks like personalizing the context data allows you to get more organized context.? \()/
         context['sight_word_list'] = self.object.sight_word_list.all()
         context['syllable_word_list'] = self.object.syllable_word_list.all()
+        context['hackable_word_set_list'] = self.object.hackable_word_set_list.all()
+        context['lessonplan_tab'] = True
         return context
 
 

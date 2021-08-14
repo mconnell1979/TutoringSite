@@ -4,7 +4,7 @@
 
 
 {% block content %}
-<h1 id="testHeader2">Lesson ({{ self.kwargs.id }}) Plan Template Delete - Detail View </h1>
+<h1 id="testHeader2">Lesson ({{ lesson.id }}) - Detail View </h1>
 
 <div class="container">
     <div class="row">
@@ -15,9 +15,9 @@
                 <div class="card-body">
                     <h5 class="card-title">Capture Words</h5>
                     <p class="card-text">
-                   {% for sightword in sight_word_list %}
+                        {% for sightword in sight_word_list %}
                         {{ sightword.name }},
-                    {% endfor %}
+                        {% endfor %}
                     </p>
                     <a href="#"
                        class="btn btn-outline-primary btn-sm">
@@ -34,9 +34,9 @@
                 <div class="card-body">
                     <h5 class="card-title">Syllable Words</h5>
                     <p class="card-text">
-                   {% for syllableword in syllable_word_list %}
+                        {% for syllableword in syllable_word_list %}
                         {{ syllableword.name }},
-                    {% endfor %}
+                        {% endfor %}
                     </p>
                     <a href="#"
                        class="btn btn-outline-primary btn-sm">
@@ -50,9 +50,11 @@
         <div class="col-lg-6 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Book</h5>
+                    <h5 class="card-title">Hackable Sheets</h5>
                     <p class="card-text">
-                        ok
+                        {% for hackablelist in hackable_word_set_list %}
+                        {{ hackablelist.book }} Sheet {{hackablelist.orig_num}},
+                        {% endfor %}
                     </p>
                     <a href="#"
                        class="btn btn-outline-primary btn-sm">
