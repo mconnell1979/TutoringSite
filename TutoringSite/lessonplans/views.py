@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.detail import SingleObjectMixin
 from django.http import JsonResponse
 from lessonplans.models import LessonPlan
 from sightwords.models import SightWord
@@ -20,17 +21,40 @@ class LessonIndexView(LoginRequiredMixin, ListView):
         return LessonPlan.objects.filter(tutor=self.request.user)
 
     def get_context_data(self, **kwargs):
+        # using super() calls the parent function just like it would anyway
+        # if you don't use it then you're completely overriding the function.
         context = super().get_context_data(**kwargs)
         context['lessonplan_tab'] = True
         return context
 
 
+class WordCardView(LoginRequiredMixin, ListView):
+    template_name = "lessonplans/cardview.html"
+    login_url = '/login/'
+    model = LessonPlan
+    paginate_by = 1
+    context_object_name = 'words'
+
+    def get_queryset(self):
+        myobj = LessonPlan.objects.get(pk=self.kwargs.get('id'))
+        myquery = myobj.sight_word_list.all()
+        return myquery
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['myobj'] = LessonPlan.objects.get(pk=self.kwargs.get('id'))
+        context['lessonplan_tab'] = True
+        return context
+
+
+# Not Used
 class LessonplanListView(ListView):
     # template_name = "lessonplans/lesson_plan_listview.html"
     # This Listview class defaults to model_list.html unless you override the template_name attribute.
     model = LessonPlan
     context_object_name = 'lesson'
     print(model.student)
+
 
 class LessonplanDetailView(PermissionRequiredMixin, DetailView):
     template_name = "lessonplans/lessonplan_detail.html"
@@ -127,6 +151,7 @@ def lesson_plan_create_view(request):
     }
     return render(request, "lessonplans/lesson_plan_create.html", context)
 
+
 # My First Class Based Template View
 class IndexView(LoginRequiredMixin, TemplateView):
     template_name = "lessonplans/lesson_plan.html"
@@ -155,6 +180,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
         print("")
         print("The return comes next:")
         return context['lessons']
+
 
 @csrf_exempt
 def update_grade(request):

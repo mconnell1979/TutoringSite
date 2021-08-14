@@ -19,7 +19,7 @@
                         {{ sightword.name }},
                         {% endfor %}
                     </p>
-                    <a href="#"
+                    <a href="{% url 'lessonplans:card' lesson.id %}"
                        class="btn btn-outline-primary btn-sm">
                         Start Capture Words
                     </a>
