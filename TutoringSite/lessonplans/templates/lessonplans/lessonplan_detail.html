@@ -95,7 +95,7 @@
                         {{ personalword.sight_word.name }},
                         {% endfor %}
                     </p>
-                    <a href="{% url 'lessonplans:card' lesson.id 'personal' %}"
+                    <a href="{% url 'lessonplans:sight_words' lesson.student.id  lesson.id %}"
                        class="btn btn-outline-primary btn-sm">
                         Start Personal Words
                     </a>

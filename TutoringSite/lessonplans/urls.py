@@ -5,9 +5,9 @@ from . import views
 app_name = 'lessonplans'
 urlpatterns = [
     path('', views.LessonIndexView.as_view(), name='LessonPlanIndex'),
-    path('createview', views.LessonplanCreateView.as_view(), name='create'),
-    path('create/', views.lesson_plan_create_view),
+    path('create/', views.lessonplan_create_function),
     path('<int:pk>/', views.LessonplanDetailView.as_view(), name='detail'),
-    path('wordcard/<int:pk>/<str:wordtype>', views.WordCardView.as_view(), name='card'),
+    path('word_card/<int:pk>/<str:wordtype>', views.WordCardView.as_view(), name='card'),
+    path('sight_words/<int:pk>/<int:lesson_id>', views.PersonalSightWordCardView.as_view(), name='sight_words'),
     path('grade', views.update_grade),
 ]

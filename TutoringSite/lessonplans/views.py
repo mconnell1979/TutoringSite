@@ -65,7 +65,11 @@ class WordCardView(LoginRequiredMixin, ListView):
         elif self.kwargs.get('wordtype') == 'affix':
             myquery = lessonobj.affix_word_list.all()
         elif self.kwargs.get('wordtype') == 'personal':
-            myquery = ''
+            print('Heres the myquer= try')
+            print(lessonobj.student)
+            print(lessonobj.sight_word_list.all())
+            print(PersonalSightWord.objects.filter(student=lessonobj.student.id))
+            myquery = PersonalSightWord.objects.filter(student=lessonobj.student.id)
         else:
             myquery = ''
         return myquery
@@ -77,13 +81,7 @@ class WordCardView(LoginRequiredMixin, ListView):
         return context
 
 
-class LessonplanCreateView(CreateView):
-    model = LessonPlan
-    template_name = "lessonplans/lessonplan_createview.html"
-    context_object_name = 'lesson_plan'
-
-
-def lesson_plan_create_view(request):
+def lessonplan_create_function(request):
     form = LessonPlanForm(request.POST or None)
     if form.is_valid():
         form.save()
@@ -92,7 +90,7 @@ def lesson_plan_create_view(request):
     context = {
         'form': form
     }
-    return render(request, "lessonplans/lesson_plan_create.html", context)
+    return render(request, "lessonplans/lessonplan_create.html", context)
 
 
 # My First Class Based Template View
@@ -131,3 +129,23 @@ def update_grade(request):
         return JsonResponse({'foo': 'bar'})
     else:
         return JsonResponse({"error": "Expected POST"})
+
+
+class PersonalSightWordCardView(LoginRequiredMixin, ListView):
+    template_name = "lessonplans/personalsightcardview.html"
+    login_url = '/login/'
+    model = PersonalSightWord
+    paginate_by = 1
+    context_object_name = 'words'
+
+    def get_queryset(self):
+        personal_words_obj = self.model.objects.get(pk=self.kwargs.get('pk'))
+        my_query = self.model.objects.filter(student=personal_words_obj.student.id)
+        return my_query
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lessonid'] = self.kwargs.get("lesson_id")
+        context['myobj'] = self.model.objects.get(pk=self.kwargs.get('pk'))
+        context['lessonplan_tab'] = True
+        return context
