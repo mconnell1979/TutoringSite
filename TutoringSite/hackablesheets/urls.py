@@ -7,7 +7,7 @@ urlpatterns = [
     path('', views.HackableBookIndexView.as_view(), name='HackableBookIndex'),
     path('WordSheetList/<int:orig_book>', views.HackableWordSheetIndexView.as_view(),
          name='HackableWordSheetIndex'),
-    path('WordSheet/<int:id>', views.HackableWordSheetDetailView.as_view(),
+    path('WordSheet/<int:pk>', views.HackableWordSheetDetailView.as_view(),
          name='HackableWordSheet'),
     path('Word/<int:id>/<int:wordnum>/<str:hackword>', views.HackableWordDetailView.as_view(),
          name='HackableWord'),

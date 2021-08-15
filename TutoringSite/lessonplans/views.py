@@ -34,14 +34,14 @@ class LessonplanDetailView(PermissionRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(PersonalSightWord.objects.filter(student=self.object.student.id))
-        # Note: Looks like personalizing the context data allows you to get more organized context.? \()/
+        # Note: personalizing the context data allows you to get more organized context and other object data.? \()/
         context['sight_word_list'] = self.object.sight_word_list.all()
         context['syllable_word_list'] = self.object.syllable_word_list.all()
         context['multisyllable_word_list'] = self.object.multisyllable_word_list.all()
         context['affix_word_list'] = self.object.affix_word_list.all()
         context['personal_word_list'] = PersonalSightWord.objects.filter(student=self.object.student.id)
         context['hackable_word_set_list'] = self.object.hackable_word_set_list.all()
+        context['hackable_sentence_set_list'] = self.object.hackable_sentence_set_list.all()
         context['lessonplan_tab'] = True
         return context
 
@@ -64,19 +64,47 @@ class WordCardView(LoginRequiredMixin, ListView):
             myquery = lessonobj.multisyllable_word_list.all()
         elif self.kwargs.get('wordtype') == 'affix':
             myquery = lessonobj.affix_word_list.all()
-        elif self.kwargs.get('wordtype') == 'personal':
-            print('Heres the myquer= try')
-            print(lessonobj.student)
-            print(lessonobj.sight_word_list.all())
-            print(PersonalSightWord.objects.filter(student=lessonobj.student.id))
-            myquery = PersonalSightWord.objects.filter(student=lessonobj.student.id)
         else:
-            myquery = ''
+            myquery = 'configure your href'
         return myquery
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['myobj'] = self.model.objects.get(pk=self.kwargs.get('pk'))
+        context['lessonplan_tab'] = True
+        return context
+
+
+class PersonalSightWordCardView(LoginRequiredMixin, ListView):
+    template_name = "lessonplans/personalsightcardview.html"
+    login_url = '/login/'
+    model = PersonalSightWord
+    paginate_by = 1
+    context_object_name = 'words'
+
+    def get_queryset(self):
+        personal_words_obj = self.model.objects.get(pk=self.kwargs.get('pk'))
+        my_query = self.model.objects.filter(student=personal_words_obj.student.id)
+        return my_query
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lessonid'] = self.kwargs.get("lesson_id")
+        context['myobj'] = self.model.objects.get(pk=self.kwargs.get('pk'))
+        context['lessonplan_tab'] = True
+        return context
+
+
+class LessonplanHackWordDetailView(LoginRequiredMixin, DetailView):
+    template_name = "lessonplans/hackword_detail.html"
+    context_object_name = 'sheet'
+    model = LessonPlan
+    login_url = '/login/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(self.object.hackable_word_set_list.all())
+        context['hackable_word_set_list'] = self.object.hackable_word_set_list.all()
         context['lessonplan_tab'] = True
         return context
 
@@ -130,22 +158,3 @@ def update_grade(request):
     else:
         return JsonResponse({"error": "Expected POST"})
 
-
-class PersonalSightWordCardView(LoginRequiredMixin, ListView):
-    template_name = "lessonplans/personalsightcardview.html"
-    login_url = '/login/'
-    model = PersonalSightWord
-    paginate_by = 1
-    context_object_name = 'words'
-
-    def get_queryset(self):
-        personal_words_obj = self.model.objects.get(pk=self.kwargs.get('pk'))
-        my_query = self.model.objects.filter(student=personal_words_obj.student.id)
-        return my_query
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['lessonid'] = self.kwargs.get("lesson_id")
-        context['myobj'] = self.model.objects.get(pk=self.kwargs.get('pk'))
-        context['lessonplan_tab'] = True
-        return context

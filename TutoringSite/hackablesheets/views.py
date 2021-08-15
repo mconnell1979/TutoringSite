@@ -27,10 +27,12 @@ class HackableWordSheetDetailView(LoginRequiredMixin, DetailView):
     template_name = "hackablesheets/wordsetdetail.html"
     context_object_name = 'sheet'
     login_url = '/login/'
+    model = HackableWordSet
 
-    def get_object(self, **kwargs):
-        _id = self.kwargs.get("id")
-        return get_object_or_404(HackableWordSet, id=_id)
+    # Custom Defined get_object
+    # def get_object(self, **kwargs):
+    #     _id = self.kwargs.get("id")
+    #     return get_object_or_404(HackableWordSet, id=_id)
 
 
 class HackableWordDetailView(LoginRequiredMixin, DetailView):

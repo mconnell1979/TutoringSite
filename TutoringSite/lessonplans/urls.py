@@ -9,5 +9,6 @@ urlpatterns = [
     path('<int:pk>/', views.LessonplanDetailView.as_view(), name='detail'),
     path('word_card/<int:pk>/<str:wordtype>', views.WordCardView.as_view(), name='card'),
     path('sight_words/<int:pk>/<int:lesson_id>', views.PersonalSightWordCardView.as_view(), name='sight_words'),
+    path('hack_words/<int:pk>', views.LessonplanHackWordDetailView.as_view(), name='hack_words'),
     path('grade', views.update_grade),
 ]

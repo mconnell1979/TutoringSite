@@ -113,7 +113,7 @@
                         {{ hackablelist.book }} Sheet {{hackablelist.orig_num}},
                         {% endfor %}
                     </p>
-                    <a href="#"
+                    <a href="{% url 'lessonplans:hack_words' lesson.id %}"
                        class="btn btn-outline-primary btn-sm">
                         Hackables
                     </a>
