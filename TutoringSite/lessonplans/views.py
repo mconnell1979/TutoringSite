@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic.detail import SingleObjectMixin
 from django.http import JsonResponse
 from lessonplans.models import LessonPlan
 from sightwords.models import SightWord
@@ -18,7 +17,7 @@ class LessonIndexView(LoginRequiredMixin, ListView):
     context_object_name = 'lessons'
 
     def get_queryset(self):
-        return LessonPlan.objects.filter(tutor=self.request.user)
+        return self.model.objects.filter(tutor=self.request.user)
 
     def get_context_data(self, **kwargs):
         # using super() calls the parent function just like it would anyway
@@ -36,13 +35,21 @@ class WordCardView(LoginRequiredMixin, ListView):
     context_object_name = 'words'
 
     def get_queryset(self):
-        myobj = LessonPlan.objects.get(pk=self.kwargs.get('id'))
-        myquery = myobj.sight_word_list.all()
+        print('wordtype: ' + self.kwargs.get('wordtype'))
+        myobj = self.model.objects.get(pk=self.kwargs.get('pk'))
+        if self.kwargs.get('wordtype') == 'capture':
+            myquery = myobj.sight_word_list.all()
+        elif self.kwargs.get('wordtype') == 'syllable':
+            myquery = myobj.syllable_word_list.all()
+        elif self.kwargs.get('wordtype') == 'multisyllable':
+            myquery = myobj.multisyllable_word_list.all()
+        elif self.kwargs.get('wordtype') == 'affix':
+            myquery = myobj.affix_word_list.all()
         return myquery
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['myobj'] = LessonPlan.objects.get(pk=self.kwargs.get('id'))
+        context['myobj'] = self.model.objects.get(pk=self.kwargs.get('pk'))
         context['lessonplan_tab'] = True
         return context
 
@@ -73,6 +80,8 @@ class LessonplanDetailView(PermissionRequiredMixin, DetailView):
         # Note: Looks like personalizing the context data allows you to get more organized context.? \()/
         context['sight_word_list'] = self.object.sight_word_list.all()
         context['syllable_word_list'] = self.object.syllable_word_list.all()
+        context['multisyllable_word_list'] = self.object.multisyllable_word_list.all()
+        context['affix_word_list'] = self.object.affix_word_list.all()
         context['hackable_word_set_list'] = self.object.hackable_word_set_list.all()
         context['lessonplan_tab'] = True
         return context

@@ -10,6 +10,6 @@ urlpatterns = [
     path('lessonview', views.LessonView.as_view()),
     path('create/', views.lesson_plan_create_view),
     path('<int:pk>/', views.LessonplanDetailView.as_view(), name='detail'),
-    path('wordcard/<int:id>/', views.WordCardView.as_view(), name='card'),
+    path('wordcard/<int:pk>/<str:wordtype>', views.WordCardView.as_view(), name='card'),
     path('grade', views.update_grade),
 ]

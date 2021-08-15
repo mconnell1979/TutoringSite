@@ -19,7 +19,7 @@
                         {{ sightword.name }},
                         {% endfor %}
                     </p>
-                    <a href="{% url 'lessonplans:card' lesson.id %}"
+                    <a href="{% url 'lessonplans:card' lesson.id 'capture' %}"
                        class="btn btn-outline-primary btn-sm">
                         Start Capture Words
                     </a>
@@ -38,9 +38,47 @@
                         {{ syllableword.name }},
                         {% endfor %}
                     </p>
-                    <a href="#"
+                    <a href="{% url 'lessonplans:card' lesson.id 'syllable' %}"
                        class="btn btn-outline-primary btn-sm">
                         Start Syllable Words
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if multisyllable_word_list.count > 0 %}
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Multi Syllable Words</h5>
+                    <p class="card-text">
+                        {% for multisyllableword in multisyllable_word_list %}
+                        {{ multisyllableword.name }},
+                        {% endfor %}
+                    </p>
+                    <a href="{% url 'lessonplans:card' lesson.id 'multisyllable' %}"
+                       class="btn btn-outline-primary btn-sm">
+                        Start MultiSyllable Words
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if affix_word_list.count > 0 %}
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Affix Words</h5>
+                    <p class="card-text">
+                        {% for affixeword in affix_word_list %}
+                        {{ affixeword.name }},
+                        {% endfor %}
+                    </p>
+                    <a href="{% url 'lessonplans:card' lesson.id 'affix' %}"
+                       class="btn btn-outline-primary btn-sm">
+                        Start Affix Words
                     </a>
                 </div>
             </div>
