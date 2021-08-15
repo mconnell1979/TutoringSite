@@ -22,10 +22,6 @@ class LessonPlan(models.Model):
     hackable_sentence_set_list = models.ManyToManyField(HackableSentenceSet, blank=True, through='LessonHackableSentenceSetList')
     air_write_words = models.TextField(max_length=200, blank=True, help_text="max 200 characters")
     note = models.TextField(max_length=1000, blank=True, help_text="Notes for the tutor - Max 1000 characters")
-    sight_words_start = models.PositiveSmallIntegerField(default=1)
-    sight_words_end = models.PositiveSmallIntegerField(default=25)
-    syllable_words_start = models.PositiveSmallIntegerField(default=1)
-    syllable_words_end = models.PositiveSmallIntegerField(default=25)
 
     def __str__(self):
         return 'LessonID:' + str(self.id) + ' - ' + str(self.student) + ' - lesson updated: ' + str(self.updated)
