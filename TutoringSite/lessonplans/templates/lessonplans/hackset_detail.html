@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Hackables - {{ sheet.title }} {% endblock %}
+
+{% block content %}
+<p>Hackable Word Sheet</p>
+<div class="container">
+    <div class="row">
+        <div class="row no-gutters">
+            <div class="col-6">
+                <div class="d-flex flex-row flex-wrap">
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 1 sheet.hackable_word_set.word1 %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">1</span> {{ sheet.hackable_word_set.word1 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 2 sheet.hackable_word_set.word2  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">2</span> {{ sheet.hackable_word_set.word2 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 3 sheet.hackable_word_set.word3  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">3</span> {{ sheet.hackable_word_set.word3 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 4 sheet.hackable_word_set.word4  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">4</span> {{ sheet.hackable_word_set.word4 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 5 sheet.hackable_word_set.word5  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">5</span> {{ sheet.hackable_word_set.word5 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 6 sheet.hackable_word_set.word6  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">6</span> {{ sheet.hackable_word_set.word6 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 7 sheet.hackable_word_set.word7  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">7</span> {{ sheet.hackable_word_set.word7 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 8 sheet.hackable_word_set.word8  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">8</span> {{ sheet.hackable_word_set.word8 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 9 sheet.hackable_word_set.word9  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">9</span> {{ sheet.hackable_word_set.word9 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 10 sheet.hackable_word_set.word10  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">10</span> {{ sheet.hackable_word_set.word10 }}
+                    </a>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="d-flex flex-row flex-wrap">
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 11 sheet.hackable_word_set.word11  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">11</span> {{ sheet.hackable_word_set.word11 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 12 sheet.hackable_word_set.word12  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">12</span> {{ sheet.hackable_word_set.word12 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 13 sheet.hackable_word_set.word13  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">13</span> {{ sheet.hackable_word_set.word13 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 14 sheet.hackable_word_set.word14  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">14</span> {{ sheet.hackable_word_set.word14 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 15 sheet.hackable_word_set.word15  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">15</span> {{ sheet.hackable_word_set.word15 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 16 sheet.hackable_word_set.word16  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">16</span> {{ sheet.hackable_word_set.word16 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 17 sheet.hackable_word_set.word17  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">17</span> {{ sheet.hackable_word_set.word17 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 18 sheet.hackable_word_set.word18  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">18</span> {{ sheet.hackable_word_set.word18 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 19 sheet.hackable_word_set.word19  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">19</span> {{ sheet.hackable_word_set.word19 }}
+                    </a>
+                    <a href="{% url 'hackablesheets:HackableWord' sheet.id 20 sheet.hackable_word_set.word20  %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">20</span> {{ sheet.hackable_word_set.word20 }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

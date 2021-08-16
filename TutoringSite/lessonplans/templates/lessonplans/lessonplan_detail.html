@@ -109,14 +109,17 @@
                 <div class="card-body">
                     <h5 class="card-title">Hackable Sheets</h5>
                     <p class="card-text">
-                        {% for hackablelist in hackable_word_set_list %}
-                        {{ hackablelist.book }} Sheet {{hackablelist.orig_num}},
-                        {% endfor %}
-                    </p>
-                    <a href="{% url 'lessonplans:hack_words' lesson.id %}"
-                       class="btn btn-outline-primary btn-sm">
                         Hackables
-                    </a>
+                    <div>
+                        {% for item in hackset_list %}
+                        <a href="{% url 'lessonplans:hack_words' item.id %}"
+                           class="btn btn-outline-primary btn-sm">
+                            {{ item.hackable_word_set.book }} Sheet {{item.hackable_word_set.orig_num}}
+                        </a>
+                        {% endfor %}
+                    </div>
+                    </p>
+
                     <a href="#"
                        class="btn btn-outline-primary btn-sm">
                         Sentences
@@ -127,6 +130,5 @@
 
     </div>
 </div>
-
 
 {% endblock %}

@@ -6,6 +6,7 @@ from syllablewords.models import SyllableWord, MultiSyllableWord, Affix
 from hackablesheets.models import HackableWordSet, HackableSentenceSet
 from tutoringsite import choices
 
+
 # Create your models here.
 class LessonPlan(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
@@ -16,10 +17,12 @@ class LessonPlan(models.Model):
     scheduled = models.DateTimeField(blank=True, null=True, help_text="scheduled time for lesson to be given")
     sight_word_list = models.ManyToManyField(SightWord, blank=True, through='LessonSightWordList')
     syllable_word_list = models.ManyToManyField(SyllableWord, blank=True, through='LessonSyllableWordList')
-    multisyllable_word_list = models.ManyToManyField(MultiSyllableWord, blank=True, through='LessonMultiSyllableWordList')
+    multisyllable_word_list = models.ManyToManyField(MultiSyllableWord, blank=True,
+                                                     through='LessonMultiSyllableWordList')
     affix_word_list = models.ManyToManyField(Affix, blank=True, through='LessonAffixWordList')
     hackable_word_set_list = models.ManyToManyField(HackableWordSet, blank=True, through='LessonHackableWordSetList')
-    hackable_sentence_set_list = models.ManyToManyField(HackableSentenceSet, blank=True, through='LessonHackableSentenceSetList')
+    hackable_sentence_set_list = models.ManyToManyField(HackableSentenceSet, blank=True,
+                                                        through='LessonHackableSentenceSetList')
     air_write_words = models.TextField(max_length=200, blank=True, help_text="max 200 characters")
     note = models.TextField(max_length=1000, blank=True, help_text="Notes for the tutor - Max 1000 characters")
 
@@ -122,6 +125,9 @@ class LessonHackableWordSetList(models.Model):
 
     def __str__(self):
         return str(self.hackable_word_set)
+
+    def __repr__(self):
+        return '{self.__class__.__name__}(id={self.id}, {self.hackable_word_set}, {self.lesson_plan},'.format(self=self)
 
 
 class LessonHackableSentenceSetList(models.Model):

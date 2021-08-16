@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from lessonplans.models import LessonPlan, PersonalSightWord
+from lessonplans.models import LessonPlan, PersonalSightWord, LessonHackableWordSetList
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from lessonplans.forms import LessonPlanForm
@@ -34,6 +34,8 @@ class LessonplanDetailView(PermissionRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        # print(self.object.hackable_word_set_list.all())
+        # print(LessonPlan.hackable_word_set_list.through.objects.all())
         # Note: personalizing the context data allows you to get more organized context and other object data.? \()/
         context['sight_word_list'] = self.object.sight_word_list.all()
         context['syllable_word_list'] = self.object.syllable_word_list.all()
@@ -42,6 +44,8 @@ class LessonplanDetailView(PermissionRequiredMixin, DetailView):
         context['personal_word_list'] = PersonalSightWord.objects.filter(student=self.object.student.id)
         context['hackable_word_set_list'] = self.object.hackable_word_set_list.all()
         context['hackable_sentence_set_list'] = self.object.hackable_sentence_set_list.all()
+        # context['WTF'] = self.object.hackable_word_set_list.through.objects.all()
+        context['hackset_list'] = self.object.hackable_word_set_list.through.objects.filter(lesson_plan=self.object)
         context['lessonplan_tab'] = True
         return context
 
@@ -96,15 +100,14 @@ class PersonalSightWordCardView(LoginRequiredMixin, ListView):
 
 
 class LessonplanHackWordDetailView(LoginRequiredMixin, DetailView):
-    template_name = "lessonplans/hackword_detail.html"
+    template_name = "lessonplans/hackset_detail.html"
     context_object_name = 'sheet'
-    model = LessonPlan
+    # model = LessonPlan
+    model = LessonHackableWordSetList
     login_url = '/login/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(self.object.hackable_word_set_list.all())
-        context['hackable_word_set_list'] = self.object.hackable_word_set_list.all()
         context['lessonplan_tab'] = True
         return context
 
