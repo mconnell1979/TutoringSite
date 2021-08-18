@@ -95,7 +95,7 @@
                         {{ personalword.sight_word.name }},
                         {% endfor %}
                     </p>
-                    <a href="{% url 'lessonplans:sight_words' lesson.student.id  lesson.id %}"
+                    <a href="{% url 'lessonplans:sight_words' lesson.id lesson.student.id %}"
                        class="btn btn-outline-primary btn-sm">
                         Start Personal Words
                     </a>
@@ -112,18 +112,22 @@
                         Hackables
                     <div>
                         {% for item in hackset_list %}
-                        <a href="{% url 'lessonplans:hack_words' item.id %}"
+                        <a href="{% url 'lessonplans:hack_words' item.lesson_plan_id item.id %}"
                            class="btn btn-outline-primary btn-sm">
                             {{ item.hackable_word_set.book }} Sheet {{item.hackable_word_set.orig_num}}
                         </a>
                         {% endfor %}
                     </div>
                     </p>
-
-                    <a href="#"
-                       class="btn btn-outline-primary btn-sm">
-                        Sentences
-                    </a>
+                    Sentences
+                    <div>
+                        {% for item in hacksent_list %}
+                        <a href="{% url 'lessonplans:hacksent_set' item.lesson_plan_id item.id %}"
+                           class="btn btn-outline-primary btn-sm">
+                            {{ item.hackable_sentence_set.book }} Sheet {{item.hackable_sentence_set.orig_num}}
+                        </a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

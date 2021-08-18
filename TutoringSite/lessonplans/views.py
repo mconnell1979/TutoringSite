@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from lessonplans.models import LessonPlan, PersonalSightWord, LessonHackableWordSetList
+from lessonplans.models import LessonPlan, PersonalSightWord, LessonHackableWordSetList, LessonHackableSentenceSetList
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from lessonplans.forms import LessonPlanForm
@@ -10,6 +10,23 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 
 class LessonIndexView(LoginRequiredMixin, ListView):
     template_name = "lessonplans/index.html"
+    login_url = '/login/'
+    model = LessonPlan
+    context_object_name = 'lessons'
+
+    def get_queryset(self):
+        return self.model.objects.filter(tutor=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        # using super() calls the parent function just like it would anyway
+        # if you don't use it then you're completely overriding the function.
+        context = super().get_context_data(**kwargs)
+        context['lessonplan_tab'] = True
+        return context
+
+
+class LessonTutorIndexView(LoginRequiredMixin, ListView):
+    template_name = "lessonplans/tutor_index.html"
     login_url = '/login/'
     model = LessonPlan
     context_object_name = 'lessons'
@@ -34,8 +51,6 @@ class LessonplanDetailView(PermissionRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # print(self.object.hackable_word_set_list.all())
-        # print(LessonPlan.hackable_word_set_list.through.objects.all())
         # Note: personalizing the context data allows you to get more organized context and other object data.? \()/
         context['sight_word_list'] = self.object.sight_word_list.all()
         context['syllable_word_list'] = self.object.syllable_word_list.all()
@@ -44,8 +59,8 @@ class LessonplanDetailView(PermissionRequiredMixin, DetailView):
         context['personal_word_list'] = PersonalSightWord.objects.filter(student=self.object.student.id)
         context['hackable_word_set_list'] = self.object.hackable_word_set_list.all()
         context['hackable_sentence_set_list'] = self.object.hackable_sentence_set_list.all()
-        # context['WTF'] = self.object.hackable_word_set_list.through.objects.all()
         context['hackset_list'] = self.object.hackable_word_set_list.through.objects.filter(lesson_plan=self.object)
+        context['hacksent_list'] = self.object.hackable_sentence_set_list.through.objects.filter(lesson_plan=self.object)
         context['lessonplan_tab'] = True
         return context
 
@@ -99,15 +114,58 @@ class PersonalSightWordCardView(LoginRequiredMixin, ListView):
         return context
 
 
-class LessonplanHackWordDetailView(LoginRequiredMixin, DetailView):
+class LessonplanHackSetDetailView(LoginRequiredMixin, DetailView):
     template_name = "lessonplans/hackset_detail.html"
     context_object_name = 'sheet'
-    # model = LessonPlan
     model = LessonHackableWordSetList
     login_url = '/login/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['myobj'] = self.kwargs.get('lesson_id')
+        context['lessonplan_tab'] = True
+        return context
+
+
+class LessonplanHackWordDetailView(LoginRequiredMixin, DetailView):
+    template_name = "lessonplans/hackword_detail.html"
+    context_object_name = 'sheet'
+    model = LessonHackableWordSetList
+    login_url = '/login/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['wordnum'] = self.kwargs.get("wordnum")
+        context['hackword'] = self.kwargs.get("hackword")
+        context['myobj'] = self.kwargs.get('lesson_id')
+        context['lessonplan_tab'] = True
+        return context
+
+
+class LessonplanHackSentSetDetailView(LoginRequiredMixin, DetailView):
+    template_name = "lessonplans/HackSentSet_detail.html"
+    context_object_name = 'sheet'
+    model = LessonHackableSentenceSetList
+    login_url = '/login/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['myobj'] = self.kwargs.get('lesson_id')
+        context['lessonplan_tab'] = True
+        return context
+
+
+class LessonplanHackSentDetailView(LoginRequiredMixin, DetailView):
+    template_name = "lessonplans/hacksent_detail.html"
+    context_object_name = 'sheet'
+    model = LessonHackableSentenceSetList
+    login_url = '/login/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sentencenum'] = self.kwargs.get("sentencenum")
+        context['sentence'] = self.kwargs.get("sentence")
+        context['myobj'] = self.kwargs.get('lesson_id')
         context['lessonplan_tab'] = True
         return context
 

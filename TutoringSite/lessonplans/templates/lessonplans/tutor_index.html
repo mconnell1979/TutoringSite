@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Lesson Plan - Index {% endblock %}
+
+{% block content %}
+<h1>Lessons Index</h1>
+
+<div class="container">
+    <div class="row">
+        {% for lesson in lessons %}
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Student({{ lesson.student.id }}): {{ lesson.student.first_name }}
+                        {{ lesson.student.last_name }}</h5>
+                    <p class="card-text">
+                        Tutor: {{ lesson.tutor }}
+                    </p>
+                    <p class="card-text">
+                        Scheduled: {{ lesson.scheduled }}
+                    </p>
+                    <a href="#"
+                       class="btn btn-outline-primary btn-sm">
+                        Summary
+                    </a>
+                    <a href="{% url 'lessonplans:detail' lesson.id %}"
+                       class="btn btn-outline-primary btn-sm">
+                        Lesson {{ lesson.id }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
