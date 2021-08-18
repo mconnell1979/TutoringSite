@@ -11,4 +11,6 @@ class IndexView(TemplateView):
     template_name = "pages/home_page.html"
 
     def get_context_data(self, *args, **kwargs):
-        return None
+        context = {}
+        context['home_tab'] = True
+        return context

@@ -12,6 +12,11 @@ class SyllableWordIndexView(LoginRequiredMixin, ListView):
     context_object_name = 'words'
     queryset = SyllableWord.objects.filter(orig_num=1)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_tab'] = True
+        return context
+
 
 class SyllableWordBookListView(LoginRequiredMixin, ListView):
     template_name = "syllablewords/booklist.html"
@@ -22,6 +27,11 @@ class SyllableWordBookListView(LoginRequiredMixin, ListView):
     def get_queryset(self, *args, **kwargs):
         return SyllableWord.objects.filter(orig_book=self.kwargs.get('orig_book'))\
             .filter(orig_box=self.kwargs.get('orig_box'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_tab'] = True
+        return context
 
 
 class SyllableWordDetailView(LoginRequiredMixin, DetailView):
@@ -47,4 +57,5 @@ class SyllableWordDetailView(LoginRequiredMixin, DetailView):
         except ObjectDoesNotExist:
             context['next_url'] = None
 
+        context['ref_tab'] = True
         return context

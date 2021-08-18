@@ -11,6 +11,11 @@ class HackableBookIndexView(LoginRequiredMixin, ListView):
     queryset = HackableBook.objects.all()
     login_url = '/login/'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_tab'] = True
+        return context
+
 
 class HackableWordSheetIndexView(LoginRequiredMixin, ListView):
     template_name = "hackablesheets/wordsheetindex.html"
@@ -21,12 +26,22 @@ class HackableWordSheetIndexView(LoginRequiredMixin, ListView):
     def get_queryset(self, *args, **kwargs):
         return HackableWordSet.objects.filter(book__orig_book=self.kwargs.get('orig_book'))
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_tab'] = True
+        return context
+
 
 class HackableWordSheetDetailView(LoginRequiredMixin, DetailView):
     template_name = "hackablesheets/wordsetdetail.html"
     context_object_name = 'sheet'
     login_url = '/login/'
     model = HackableWordSet
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_tab'] = True
+        return context
 
     # Custom Defined get_object
     # def get_object(self, **kwargs):
@@ -47,6 +62,7 @@ class HackableWordDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['wordnum'] = self.kwargs.get("wordnum")
         context['hackword'] = self.kwargs.get("hackword")
+        context['ref_tab'] = True
         return context
 
 
@@ -59,6 +75,11 @@ class HackableSentenceSheetIndexView(LoginRequiredMixin, ListView):
     def get_queryset(self, *args, **kwargs):
         return HackableSentenceSet.objects.filter(book__orig_book=self.kwargs.get('orig_book'))
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_tab'] = True
+        return context
+
 
 class HackableSentenceSheetDetailView(LoginRequiredMixin, DetailView):
     template_name = "hackablesheets/sentencesetdetail.html"
@@ -68,6 +89,11 @@ class HackableSentenceSheetDetailView(LoginRequiredMixin, DetailView):
     def get_object(self, **kwargs):
         _id = self.kwargs.get("id")
         return get_object_or_404(HackableSentenceSet, id=_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_tab'] = True
+        return context
 
 
 class HackableSentenceDetailView(LoginRequiredMixin, DetailView):
@@ -83,4 +109,5 @@ class HackableSentenceDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['sentencenum'] = self.kwargs.get("sentencenum")
         context['sentence'] = self.kwargs.get("sentence")
+        context['ref_tab'] = True
         return context

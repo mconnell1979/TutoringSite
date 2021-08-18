@@ -13,6 +13,12 @@ class SightwordIndexView(LoginRequiredMixin, ListView):
     queryset = SightWord.objects.filter(orig_num=1)
     login_url = '/login/'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_tab'] = True
+        return context
+
+
 class SightWordSetListView(LoginRequiredMixin, ListView):
     template_name = "sightwords/setlist.html"
     model = SightWord
@@ -21,6 +27,11 @@ class SightWordSetListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self, *args, **kwargs):
         return SightWord.objects.filter(orig_set=self.kwargs.get('orig_set'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_tab'] = True
+        return context
 
 
 class SightwordDetailView(LoginRequiredMixin, DetailView):
@@ -46,18 +57,8 @@ class SightwordDetailView(LoginRequiredMixin, DetailView):
         except ObjectDoesNotExist:
             context['next_url'] = None
 
+        context['ref_tab'] = True
         return context
-
-
-# Delete All These Function Based Views Below
-# def index(request):
-#     #  return HttpResponse('Sight Words Index')
-#     return render(request, 'sightwords/index.html')
-#
-#
-# def wordlist(request):
-#     words = SightWord.objects.all()
-#     return render(request, 'sightwords/wordlist.html', {'words': words})
 
 
 def carousellist(request):
