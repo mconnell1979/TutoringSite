@@ -8,9 +8,10 @@ from lessonplans.forms import LessonPlanForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
-class LessonIndexView(LoginRequiredMixin, ListView):
-    template_name = "lessonplans/index.html"
+class LessonIndexView(PermissionRequiredMixin, ListView):
     login_url = '/login/'
+    permission_required = 'lessonplans.view_lessonplan'
+    template_name = "lessonplans/index.html"
     model = LessonPlan
     context_object_name = 'lessons'
 
@@ -25,9 +26,10 @@ class LessonIndexView(LoginRequiredMixin, ListView):
         return context
 
 
-class LessonTutorIndexView(LoginRequiredMixin, ListView):
-    template_name = "lessonplans/tutor_index.html"
+class LessonTutorIndexView(PermissionRequiredMixin, ListView):
     login_url = '/login/'
+    permission_required = 'lessonplans.view_lessonplan'
+    template_name = "lessonplans/tutor_index.html"
     model = LessonPlan
     context_object_name = 'lessons'
 
@@ -43,11 +45,11 @@ class LessonTutorIndexView(LoginRequiredMixin, ListView):
 
 
 class LessonplanDetailView(PermissionRequiredMixin, DetailView):
+    login_url = '/login/'
+    permission_required = 'lessonplans.view_lessonplan'
     template_name = "lessonplans/lessonplan_detail.html"
     context_object_name = 'lesson'
     model = LessonPlan
-    login_url = '/login/'
-    permission_required = ('lessonplans.add_lessonplan', 'lessonplans.view_lessonplan')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -65,9 +67,10 @@ class LessonplanDetailView(PermissionRequiredMixin, DetailView):
         return context
 
 
-class WordCardView(LoginRequiredMixin, ListView):
-    template_name = "lessonplans/cardview.html"
+class WordCardView(PermissionRequiredMixin, ListView):
     login_url = '/login/'
+    permission_required = 'lessonplans.view_lessonplan'
+    template_name = "lessonplans/cardview.html"
     model = LessonPlan
     paginate_by = 1
     context_object_name = 'words'
@@ -94,9 +97,10 @@ class WordCardView(LoginRequiredMixin, ListView):
         return context
 
 
-class PersonalSightWordCardView(LoginRequiredMixin, ListView):
-    template_name = "lessonplans/personalsightcardview.html"
+class PersonalSightWordCardView(PermissionRequiredMixin, ListView):
     login_url = '/login/'
+    permission_required = 'lessonplans.view_lessonplan'
+    template_name = "lessonplans/personalsightcardview.html"
     model = PersonalSightWord
     paginate_by = 1
     context_object_name = 'words'
@@ -114,11 +118,12 @@ class PersonalSightWordCardView(LoginRequiredMixin, ListView):
         return context
 
 
-class LessonplanHackSetDetailView(LoginRequiredMixin, DetailView):
+class LessonplanHackSetDetailView(PermissionRequiredMixin, DetailView):
+    login_url = '/login/'
+    permission_required = 'lessonplans.view_lessonplan'
     template_name = "lessonplans/hackset_detail.html"
     context_object_name = 'sheet'
     model = LessonHackableWordSetList
-    login_url = '/login/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -127,11 +132,12 @@ class LessonplanHackSetDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class LessonplanHackWordDetailView(LoginRequiredMixin, DetailView):
+class LessonplanHackWordDetailView(PermissionRequiredMixin, DetailView):
+    login_url = '/login/'
+    permission_required = 'lessonplans.view_lessonplan'
     template_name = "lessonplans/hackword_detail.html"
     context_object_name = 'sheet'
     model = LessonHackableWordSetList
-    login_url = '/login/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -142,11 +148,12 @@ class LessonplanHackWordDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class LessonplanHackSentSetDetailView(LoginRequiredMixin, DetailView):
+class LessonplanHackSentSetDetailView(PermissionRequiredMixin, DetailView):
+    login_url = '/login/'
+    permission_required = 'lessonplans.view_lessonplan'
     template_name = "lessonplans/HackSentSet_detail.html"
     context_object_name = 'sheet'
     model = LessonHackableSentenceSetList
-    login_url = '/login/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -155,11 +162,12 @@ class LessonplanHackSentSetDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class LessonplanHackSentDetailView(LoginRequiredMixin, DetailView):
+class LessonplanHackSentDetailView(PermissionRequiredMixin, DetailView):
+    login_url = '/login/'
+    permission_required = 'lessonplans.view_lessonplan'
     template_name = "lessonplans/hacksent_detail.html"
     context_object_name = 'sheet'
     model = LessonHackableSentenceSetList
-    login_url = '/login/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -170,22 +178,10 @@ class LessonplanHackSentDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-def lessonplan_create_function(request):
-    form = LessonPlanForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        # form.LessonPlanForm()  # This Re-renders the form after the save and will blank or default all the fields out.
-
-    context = {
-        'form': form
-    }
-    return render(request, "lessonplans/lessonplan_create.html", context)
-
-
 # My First Class Based Template View
 class IndexView(LoginRequiredMixin, TemplateView):
-    template_name = "lessonplans/lesson_plan.html"
     login_url = '/admin/login/'
+    template_name = "lessonplans/lesson_plan.html"
 
     def get_context_data(self, **kwargs):
         # super() = Function used to give access to the methods of a parent class.
@@ -219,3 +215,14 @@ def update_grade(request):
     else:
         return JsonResponse({"error": "Expected POST"})
 
+
+def lessonplan_create_function(request):
+    form = LessonPlanForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        # form.LessonPlanForm()  # This Re-renders the form after the save and will blank or default all the fields out.
+
+    context = {
+        'form': form
+    }
+    return render(request, "lessonplans/lessonplan_create.html", context)

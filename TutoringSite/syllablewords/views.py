@@ -1,13 +1,13 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import SyllableWord
 
 
-class SyllableWordIndexView(LoginRequiredMixin, ListView):
+class SyllableWordIndexView(PermissionRequiredMixin, ListView):
+    permission_required = 'syllablewords.view_syllableword'
     template_name = "syllablewords/index.html"
-    login_url = '/login/'
     model = SyllableWord
     context_object_name = 'words'
     queryset = SyllableWord.objects.filter(orig_num=1)
@@ -18,9 +18,9 @@ class SyllableWordIndexView(LoginRequiredMixin, ListView):
         return context
 
 
-class SyllableWordBookListView(LoginRequiredMixin, ListView):
+class SyllableWordBookListView(PermissionRequiredMixin, ListView):
+    permission_required = 'syllablewords.view_syllableword'
     template_name = "syllablewords/booklist.html"
-    login_url = '/login/'
     model = SyllableWord
     context_object_name = 'words'
 
@@ -34,10 +34,10 @@ class SyllableWordBookListView(LoginRequiredMixin, ListView):
         return context
 
 
-class SyllableWordDetailView(LoginRequiredMixin, DetailView):
+class SyllableWordDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'syllablewords.view_syllableword'
     template_name = "syllablewords/detailview.html"
     context_object_name = 'words'
-    login_url = '/login/'
 
     def get_object(self, **kwargs):
         _id = self.kwargs.get("id")

@@ -1,15 +1,15 @@
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import get_object_or_404
 from .models import HackableWordSet, HackableBook, HackableSentenceSet
 
 
-class HackableBookIndexView(LoginRequiredMixin, ListView):
+class HackableBookIndexView(PermissionRequiredMixin, ListView):
+    permission_required = 'hackablesheets.view_hackablebook'
     template_name = "hackablesheets/index.html"
     model = HackableBook
     context_object_name = 'books'
     queryset = HackableBook.objects.all()
-    login_url = '/login/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -17,9 +17,9 @@ class HackableBookIndexView(LoginRequiredMixin, ListView):
         return context
 
 
-class HackableWordSheetIndexView(LoginRequiredMixin, ListView):
+class HackableWordSheetIndexView(PermissionRequiredMixin, ListView):
+    permission_required = 'hackablesheets.view_hackablebook'
     template_name = "hackablesheets/wordsheetindex.html"
-    login_url = '/login/'
     model = HackableWordSet
     context_object_name = 'sheets'
 
@@ -32,10 +32,10 @@ class HackableWordSheetIndexView(LoginRequiredMixin, ListView):
         return context
 
 
-class HackableWordSheetDetailView(LoginRequiredMixin, DetailView):
+class HackableWordSheetDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'hackablesheets.view_hackablebook'
     template_name = "hackablesheets/wordsetdetail.html"
     context_object_name = 'sheet'
-    login_url = '/login/'
     model = HackableWordSet
 
     def get_context_data(self, **kwargs):
@@ -49,10 +49,10 @@ class HackableWordSheetDetailView(LoginRequiredMixin, DetailView):
     #     return get_object_or_404(HackableWordSet, id=_id)
 
 
-class HackableWordDetailView(LoginRequiredMixin, DetailView):
+class HackableWordDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'hackablesheets.view_hackablebook'
     template_name = "hackablesheets/worddetail.html"
     context_object_name = 'sheet'
-    login_url = '/login/'
 
     def get_object(self, **kwargs):
         _id = self.kwargs.get("id")
@@ -66,9 +66,9 @@ class HackableWordDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class HackableSentenceSheetIndexView(LoginRequiredMixin, ListView):
+class HackableSentenceSheetIndexView(PermissionRequiredMixin, ListView):
+    permission_required = 'hackablesheets.view_hackablebook'
     template_name = "hackablesheets/sentencesheetindex.html"
-    login_url = '/login/'
     model = HackableSentenceSet
     context_object_name = 'sheets'
 
@@ -81,7 +81,8 @@ class HackableSentenceSheetIndexView(LoginRequiredMixin, ListView):
         return context
 
 
-class HackableSentenceSheetDetailView(LoginRequiredMixin, DetailView):
+class HackableSentenceSheetDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'hackablesheets.view_hackablebook'
     template_name = "hackablesheets/sentencesetdetail.html"
     context_object_name = 'sheet'
     login_url = '/login/'
@@ -96,10 +97,10 @@ class HackableSentenceSheetDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class HackableSentenceDetailView(LoginRequiredMixin, DetailView):
+class HackableSentenceDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'hackablesheets.view_hackablebook'
     template_name = "hackablesheets/sentencedetail.html"
     context_object_name = 'sheet'
-    login_url = '/login/'
 
     def get_object(self, **kwargs):
         _id = self.kwargs.get("id")
