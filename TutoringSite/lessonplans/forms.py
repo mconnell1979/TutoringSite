@@ -22,12 +22,12 @@ class LessonPlanForm(forms.ModelForm):
         ]
 
         widgets = {
-            'sight_word_list': forms.SelectMultiple(attrs={'size': 25}),
-            'syllable_word_list': forms.SelectMultiple(attrs={'size': 25}),
-            'multisyllable_word_list': forms.SelectMultiple(attrs={'size': 25}),
-            'affix_word_list': forms.SelectMultiple(attrs={'size': 25}),
-            'hackable_word_set_list': forms.SelectMultiple(attrs={'size': 25}),
-            'hackable_sentence_set_list': forms.SelectMultiple(attrs={'size': 25}),
+            'sight_word_list': forms.SelectMultiple(attrs={'size': 15}),
+            'syllable_word_list': forms.SelectMultiple(attrs={'size': 15}),
+            'multisyllable_word_list': forms.SelectMultiple(attrs={'size': 15}),
+            'affix_word_list': forms.SelectMultiple(attrs={'size': 15}),
+            'hackable_word_set_list': forms.SelectMultiple(attrs={'size': 5}),
+            'hackable_sentence_set_list': forms.SelectMultiple(attrs={'size': 5}),
             'air_write_words': forms.Textarea(attrs={'class': 'textarea', 'rows': 2, 'placeholder': 'word_1, word_2, etc...'}),
             'note': forms.Textarea(attrs={'class': 'textarea', 'rows': 6, 'placeholder': 'notes...'}),
         }

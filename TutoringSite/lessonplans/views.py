@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from lessonplans.models import LessonPlan, PersonalSightWord, LessonHackableWordSetList, LessonHackableSentenceSetList
@@ -10,19 +10,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 
 class LessonIndexView(PermissionRequiredMixin, ListView):
     login_url = '/login/'
-    permission_required = 'lessonplans.view_lessonplan'
+    permission_required = ('lessonplans.view_lessonplan', 'lessonplans.add_lessonplan')
     template_name = "lessonplans/index.html"
     model = LessonPlan
     context_object_name = 'lessons'
 
     def get_queryset(self):
-        return self.model.objects.filter(tutor=self.request.user)
+        return self.model.objects.all()
 
     def get_context_data(self, **kwargs):
         # using super() calls the parent function just like it would anyway
         # if you don't use it then you're completely overriding the function.
         context = super().get_context_data(**kwargs)
-        context['lessonplan_tab'] = True
+        context['planning_tab'] = True
         return context
 
 
@@ -175,6 +175,48 @@ class LessonplanHackSentDetailView(PermissionRequiredMixin, DetailView):
         context['sentence'] = self.kwargs.get("sentence")
         context['myobj'] = self.kwargs.get('lesson_id')
         context['lessonplan_tab'] = True
+        return context
+
+
+class LessonplanHackSentWordDetailView(PermissionRequiredMixin, DetailView):
+    login_url = '/login/'
+    permission_required = 'lessonplans.view_lessonplan'
+    template_name = "lessonplans/hacksentword_detail.html"
+    context_object_name = 'sheet'
+    model = LessonHackableSentenceSetList
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['wordnum'] = self.kwargs.get("wordnum")
+        context['word'] = self.kwargs.get("word")
+        context['myobj'] = self.kwargs.get('lesson_id')
+        context['lessonplan_tab'] = True
+        return context
+
+
+class LessonplanCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = ('lessonplans.view_lessonplan', 'lessonplans.add_lessonplan')
+    template_name = 'lessonplans/lessonplan_create.html'
+    form_class = LessonPlanForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['planning_tab'] = True
+        return context
+
+
+class LessonplanUpdateView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'lessonplans.view_lessonplan'
+    template_name = 'lessonplans/lessonplan_create.html'
+    form_class = LessonPlanForm
+
+    def get_object(self):
+        pk_ = self.kwargs.get("pk")
+        return get_object_or_404(LessonPlan, pk=pk_)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['planning_tab'] = True
         return context
 
 

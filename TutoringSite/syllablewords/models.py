@@ -4,7 +4,6 @@ from django.db import models
 # Create your models here.
 class SyllableWord(models.Model):
     name = models.CharField(max_length=15)
-    order = models.IntegerField(unique=True)
     type = models.CharField(max_length=15)
     orig_box = models.IntegerField()
     orig_book = models.IntegerField()
@@ -19,12 +18,11 @@ class SyllableWord(models.Model):
 
 class MultiSyllableWord(models.Model):
     name = models.CharField(max_length=15)
-    order = models.IntegerField(unique=True)
     type = models.CharField(max_length=15)
 
     def __str__(self):
         return "%s %s %s %s" % (
-        '#', self.order, '-', self.name)
+        '#', self.id, '-', self.name)
 
     def __repr__(self):
         return '{self.__class__.__name__}(id={self.id}, {self.type}'.format(self=self)
@@ -32,12 +30,11 @@ class MultiSyllableWord(models.Model):
 
 class Affix(models.Model):
     name = models.CharField(max_length=15)
-    order = models.IntegerField(unique=True)
     type = models.CharField(max_length=15)
 
     def __str__(self):
         return "%s %s %s %s" % (
-        '#', self.order, '-', self.name)
+        '#', self.id, '-', self.name)
 
     def __repr__(self):
         return '{self.__class__.__name__}(id={self.id}, {self.type}'.format(self=self)
