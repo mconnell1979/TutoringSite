@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-# from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404
 from .models import HackableWordSet, HackableBook, HackableSentenceSet
 
 
@@ -43,11 +43,20 @@ class HackableWordSheetDetailView(PermissionRequiredMixin, DetailView):
         context['ref_tab'] = True
         return context
 
+    # Custom Defined get_object
+    # def get_object(self, **kwargs):
+    #     _id = self.kwargs.get("id")
+    #     return get_object_or_404(HackableWordSet, id=_id)
+
 
 class HackableWordDetailView(PermissionRequiredMixin, DetailView):
     permission_required = 'hackablesheets.view_hackablebook'
     template_name = "hackablesheets/worddetail.html"
     context_object_name = 'sheet'
+
+    def get_object(self, **kwargs):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(HackableWordSet, id=_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -75,8 +84,12 @@ class HackableSentenceSheetIndexView(PermissionRequiredMixin, ListView):
 class HackableSentenceSheetDetailView(PermissionRequiredMixin, DetailView):
     permission_required = 'hackablesheets.view_hackablebook'
     template_name = "hackablesheets/sentencesetdetail.html"
-    model = HackableSentenceSet
     context_object_name = 'sheet'
+    login_url = '/login/'
+
+    def get_object(self, **kwargs):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(HackableSentenceSet, id=_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -87,8 +100,11 @@ class HackableSentenceSheetDetailView(PermissionRequiredMixin, DetailView):
 class HackableSentenceDetailView(PermissionRequiredMixin, DetailView):
     permission_required = 'hackablesheets.view_hackablebook'
     template_name = "hackablesheets/sentencedetail.html"
-    model = HackableSentenceSet
     context_object_name = 'sheet'
+
+    def get_object(self, **kwargs):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(HackableWordSet, id=_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

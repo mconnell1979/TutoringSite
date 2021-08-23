@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 3rd Party apps
-    'import_export',
 
     # myapps
     'pages.apps.PagesConfig',
@@ -144,13 +143,3 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-#CSV Impor-Exprot Setings
-IMPORT_EXPORT_USE_TRANSACTIONS = True
-IMPORT_EXPORT_SKIP_ADMIN_LOG = False
-
-IMPORT_EXPORT_IMPORT_PERMISSION_CODE = None
-IMPORT_EXPORT_EXPORT_PERMISSION_CODE = None
-IMPORT_EXPORT_CHUNK_SIZE = 100
-
-

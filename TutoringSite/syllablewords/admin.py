@@ -3,15 +3,15 @@ from django.contrib import admin
 
 
 class SyllablewordAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'type', 'orig_box', 'orig_book', 'orig_num')
+    list_display = ('name', 'order', 'type', 'orig_box', 'orig_book', 'orig_num')
 
 
 class MultiSyllablewordAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'type')
+    list_display = ('name', 'order', 'type')
 
 
 class AffixAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'type')
+    list_display = ('name', 'order', 'type')
 
 
 admin.site.register(SyllableWord, SyllablewordAdmin)

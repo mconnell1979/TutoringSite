@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.urls import reverse
 from students.models import Student
 from sightwords.models import SightWord
 from syllablewords.models import SyllableWord, MultiSyllableWord, Affix
@@ -32,9 +31,6 @@ class LessonPlan(models.Model):
 
     def __repr__(self):
         return '{self.__class__.__name__}(id={self.id}, {self.student})'.format(self=self)
-
-    def get_absolute_url(self):
-        return reverse("lessonplans:detail", kwargs={"pk": self.pk})
 
 
 class PersonalSightWord(models.Model):

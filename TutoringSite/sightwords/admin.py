@@ -1,14 +1,9 @@
 from django.contrib import admin
-from . models import SightWord, SightWordSentences
+from . models import SightWord
 
 
 class SightwordAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'orig_set', 'orig_num')
-
-
-class SightwordSentencesAdmin(admin.ModelAdmin):
-    list_display = ('id', 'sentences', 'created')
+    list_display = ('name', 'order', 'orig_set', 'orig_num')
 
 
 admin.site.register(SightWord, SightwordAdmin)
-admin.site.register(SightWordSentences, SightwordSentencesAdmin)
