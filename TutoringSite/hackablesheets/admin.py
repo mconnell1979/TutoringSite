@@ -1,17 +1,18 @@
 from django.contrib import admin
 from . models import HackableWordSet, HackableSentenceSet, HackableBook
+from import_export.admin import ImportExportModelAdmin
 
 
 class HackableBookAdmin(admin.ModelAdmin):
     list_display = ('title', 'orig_book')
 
 
-class HackableWordSetAdmin(admin.ModelAdmin):
-    list_display = ('title', 'subtitle', 'book', 'orig_num')
+class HackableWordSetAdmin(ImportExportModelAdmin):
+    list_display = ('id', 'title', 'subtitle', 'book', 'orig_num')
 
 
-class HackableSentenceSetAdmin(admin.ModelAdmin):
-    list_display = ('title', 'subtitle', 'book', 'orig_num')
+class HackableSentenceSetAdmin(ImportExportModelAdmin):
+    list_display = ('id', 'title', 'subtitle', 'book', 'orig_num')
 
 
 admin.site.register(HackableBook, HackableBookAdmin)

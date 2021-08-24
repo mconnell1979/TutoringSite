@@ -50,19 +50,28 @@
                 <a class="nav-link" href="{% url 'lessonplans:LessonPlanTutorIndex' %}">Lessons</a>
             </li>
             <li class="nav-item dropdown {{ ref_tab|yesno:'active,' }}">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Ref Docs
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                     <a class="dropdown-item" href="{% url 'sightwords:SightwordsIndex' %}">Sight Words</a>
                     <a class="dropdown-item" href="{% url 'syllablewords:SyllableWordsIndex' %}">Syllable Words</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'hackablesheets:HackableBookIndex' %}">Hackable Sheets</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'sightwords:SightwordsIndex' %}">Sight Words</a>
+            <li class="nav-item dropdown {{ planning_tab|yesno:'active,' }}">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Planning
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    <a class="dropdown-item" href="{% url 'lessonplans:Index' %}">List All</a>
+                    <a class="dropdown-item" href="{% url 'lessonplans:Index' %}">List Active</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'lessonplans:LessonPlanCreate' %}">Create</a>
+                </div>
             </li>
         {% endif %}
     </ul>

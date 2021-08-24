@@ -8,34 +8,44 @@
 
 {% block content %}
 
-<a class="icon-chevron-sign-up" href="{% url 'lessonplans:detail' myobj.id %}" style="font-size:48px;color:#5555"
-   role="button"></a>
+<div class="d-flex flex-column">
 
-<a class="icon-camera-retro" style="font-size:48px;color:#5555;" data-toggle="button" aria-pressed="false"
-   autocomplete="off"
-   onclick="changeVisibility()">
-</a>
+    <div>
 
-{% if page_obj.has_previous %}
-    <a class="icon-chevron-sign-left" href="?page={{ page_obj.previous_page_number }}" style="font-size:48px;color:#5555"
-       role="button"></a>
-{% else %}
-    <a class="icon-chevron-sign-left" href="#" style="font-size:48px;color:#5555"
-       role="button"></a>
-{% endif %}
+        <a class="icon-chevron-sign-up" href="{% url 'lessonplans:detail' myobj.id %}" style="font-size:48px;color:#5555"
+        role="button"></a>
 
-{% if page_obj.has_next %}
-    <a class="icon-chevron-sign-right" href="?page={{ page_obj.next_page_number }}" style="font-size:48px;color:#5555"
-       role="button"></a>
-{% else %}
-    <a class="icon-chevron-sign-right" href="#" style="font-size:48px;color:#5555"
-       role="button"></a>
-{% endif %}
+        <a class="icon-camera-retro" style="font-size:48px;color:#5555;" data-toggle="button" aria-pressed="false"
+        autocomplete="off"
+        onclick="changeVisibility()">
+        </a>
 
-{{ page_obj.number }} of {{ paginator.num_pages }}
+        {% if page_obj.has_previous %}
+        <a class="icon-chevron-sign-left" href="?page={{ page_obj.previous_page_number }}" style="font-size:48px;color:#5555"
+        role="button"></a>
+        {% else %}
+        <a class="icon-chevron-sign-left" href="#" style="font-size:48px;color:#5555"
+        role="button"></a>
+        {% endif %}
 
-<div class="carousel-inner" id="mainWord">
-    <p class="text-center" style="font-size:20rem;"> {{ words.0.name }} </p>
+        {% if page_obj.has_next %}
+        <a class="icon-chevron-sign-right" href="?page={{ page_obj.next_page_number }}" style="font-size:48px;color:#5555"
+        role="button"></a>
+        {% else %}
+        <a class="icon-chevron-sign-right" href="#" style="font-size:48px;color:#5555"
+        role="button"></a>
+        {% endif %}
+
+        {{ page_obj.number }} of {{ paginator.num_pages }}
+
+    </div>
+
+    <div class="carousel-inner flex-grow-1" id="mainWord">
+        <p class="text-center" style="font-size:20rem;"> {{ words.0.name }} </p>
+    </div>
+
 </div>
+
+
 
 {% endblock %}
