@@ -8,6 +8,8 @@ class SyllableWord(models.Model):
     orig_box = models.IntegerField()
     orig_book = models.IntegerField()
     orig_num = models.IntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s %s %s %s %s %s %s %s" % ('Box', self.orig_box, 'Book', self.orig_book, '#', self.orig_num, '-', self.name)
@@ -19,6 +21,8 @@ class SyllableWord(models.Model):
 class MultiSyllableWord(models.Model):
     name = models.CharField(max_length=15)
     type = models.CharField(max_length=15)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s %s %s %s" % (
@@ -31,6 +35,8 @@ class MultiSyllableWord(models.Model):
 class Affix(models.Model):
     name = models.CharField(max_length=15)
     type = models.CharField(max_length=15)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s %s %s %s" % (

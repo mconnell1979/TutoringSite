@@ -37,6 +37,8 @@ class HackableWordSet(models.Model):
     word18 = models.CharField(max_length=25, blank=True)
     word19 = models.CharField(max_length=25, blank=True)
     word20 = models.CharField(max_length=25, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s %s %s" % (self.book, '#', self.orig_num)
@@ -64,6 +66,8 @@ class HackableSentenceSet(models.Model):
     sentence2 = models.CharField(max_length=100, blank=True)
     sentence3 = models.CharField(max_length=100, blank=True)
     sentence4 = models.CharField(max_length=100, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s %s %s" % (self.book, '#', self.orig_num)

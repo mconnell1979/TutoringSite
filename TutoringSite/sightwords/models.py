@@ -5,6 +5,8 @@ class SightWord(models.Model):
     name = models.CharField(max_length=25, unique=True)
     orig_set = models.IntegerField()
     orig_num = models.IntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s %s %s %s %s %s" % ('Set:', self.orig_set, '#', self.orig_num, ' - ', self.name)
