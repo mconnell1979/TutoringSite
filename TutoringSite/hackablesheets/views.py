@@ -19,7 +19,7 @@ class HackableBookIndexView(PermissionRequiredMixin, ListView):
 
 class HackableWordSheetIndexView(PermissionRequiredMixin, ListView):
     permission_required = 'hackablesheets.view_hackablebook'
-    template_name = "hackablesheets/wordsheetindex.html"
+    template_name = "hackablesheets/wordset/wordsheetindex.html"
     model = HackableWordSet
     context_object_name = 'sheets'
 
@@ -34,7 +34,7 @@ class HackableWordSheetIndexView(PermissionRequiredMixin, ListView):
 
 class HackableWordSheetDetailView(PermissionRequiredMixin, DetailView):
     permission_required = 'hackablesheets.view_hackablebook'
-    template_name = "hackablesheets/wordsetdetail.html"
+    template_name = "hackablesheets/wordset/wordsetdetail.html"
     context_object_name = 'sheet'
     model = HackableWordSet
 
@@ -46,7 +46,7 @@ class HackableWordSheetDetailView(PermissionRequiredMixin, DetailView):
 
 class HackableWordDetailView(PermissionRequiredMixin, DetailView):
     permission_required = 'hackablesheets.view_hackablebook'
-    template_name = "hackablesheets/worddetail.html"
+    template_name = "hackablesheets/wordset/worddetail.html"
     context_object_name = 'sheet'
 
     def get_context_data(self, **kwargs):
@@ -59,7 +59,7 @@ class HackableWordDetailView(PermissionRequiredMixin, DetailView):
 
 class HackableSentenceSheetIndexView(PermissionRequiredMixin, ListView):
     permission_required = 'hackablesheets.view_hackablebook'
-    template_name = "hackablesheets/sentencesheetindex.html"
+    template_name = "hackablesheets/sentences/sentencesheetindex.html"
     model = HackableSentenceSet
     context_object_name = 'sheets'
 
@@ -74,7 +74,7 @@ class HackableSentenceSheetIndexView(PermissionRequiredMixin, ListView):
 
 class HackableSentenceSheetDetailView(PermissionRequiredMixin, DetailView):
     permission_required = 'hackablesheets.view_hackablebook'
-    template_name = "hackablesheets/sentencesetdetail.html"
+    template_name = "hackablesheets/sentences/sentencesetdetail.html"
     model = HackableSentenceSet
     context_object_name = 'sheet'
 
@@ -86,7 +86,7 @@ class HackableSentenceSheetDetailView(PermissionRequiredMixin, DetailView):
 
 class HackableSentenceDetailView(PermissionRequiredMixin, DetailView):
     permission_required = 'hackablesheets.view_hackablebook'
-    template_name = "hackablesheets/sentencedetail.html"
+    template_name = "hackablesheets/sentences/sentencedetail.html"
     model = HackableSentenceSet
     context_object_name = 'sheet'
 
