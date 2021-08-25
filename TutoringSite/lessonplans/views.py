@@ -47,7 +47,7 @@ class LessonTutorIndexView(PermissionRequiredMixin, ListView):
 class LessonplanDetailView(PermissionRequiredMixin, DetailView):
     login_url = '/login/'
     permission_required = 'lessonplans.view_lessonplan'
-    template_name = "lessonplans/lessonplan_detail.html"
+    template_name = "lessonplans/lesson/lessonplan_detail.html"
     context_object_name = 'lesson'
     model = LessonPlan
 
@@ -121,7 +121,7 @@ class PersonalSightWordCardView(PermissionRequiredMixin, ListView):
 class LessonplanHackSetDetailView(PermissionRequiredMixin, DetailView):
     login_url = '/login/'
     permission_required = 'lessonplans.view_lessonplan'
-    template_name = "lessonplans/hackset_detail.html"
+    template_name = "lessonplans/hackable/hackset_detail.html"
     context_object_name = 'sheet'
     model = LessonHackableWordSetList
 
@@ -135,7 +135,7 @@ class LessonplanHackSetDetailView(PermissionRequiredMixin, DetailView):
 class LessonplanHackWordDetailView(PermissionRequiredMixin, DetailView):
     login_url = '/login/'
     permission_required = 'lessonplans.view_lessonplan'
-    template_name = "lessonplans/hackword_detail.html"
+    template_name = "lessonplans/hackable/hackword_detail.html"
     context_object_name = 'sheet'
     model = LessonHackableWordSetList
 
@@ -151,7 +151,7 @@ class LessonplanHackWordDetailView(PermissionRequiredMixin, DetailView):
 class LessonplanHackSentSetDetailView(PermissionRequiredMixin, DetailView):
     login_url = '/login/'
     permission_required = 'lessonplans.view_lessonplan'
-    template_name = "lessonplans/HackSentSet_detail.html"
+    template_name = "lessonplans/hackable/HackSentSet_detail.html"
     context_object_name = 'sheet'
     model = LessonHackableSentenceSetList
 
@@ -165,7 +165,7 @@ class LessonplanHackSentSetDetailView(PermissionRequiredMixin, DetailView):
 class LessonplanHackSentDetailView(PermissionRequiredMixin, DetailView):
     login_url = '/login/'
     permission_required = 'lessonplans.view_lessonplan'
-    template_name = "lessonplans/hacksent_detail.html"
+    template_name = "lessonplans/hackable/hacksent_detail.html"
     context_object_name = 'sheet'
     model = LessonHackableSentenceSetList
 
@@ -181,7 +181,7 @@ class LessonplanHackSentDetailView(PermissionRequiredMixin, DetailView):
 class LessonplanHackSentWordDetailView(PermissionRequiredMixin, DetailView):
     login_url = '/login/'
     permission_required = 'lessonplans.view_lessonplan'
-    template_name = "lessonplans/hacksentword_detail.html"
+    template_name = "lessonplans/hackable/hacksentword_detail.html"
     context_object_name = 'sheet'
     model = LessonHackableSentenceSetList
 
@@ -196,7 +196,7 @@ class LessonplanHackSentWordDetailView(PermissionRequiredMixin, DetailView):
 
 class LessonplanCreateView(PermissionRequiredMixin, CreateView):
     permission_required = ('lessonplans.view_lessonplan', 'lessonplans.add_lessonplan')
-    template_name = 'lessonplans/lessonplan_create.html'
+    template_name = 'lessonplans/lesson/lessonplan_create.html'
     form_class = LessonPlanForm
 
     def get_context_data(self, **kwargs):
@@ -207,7 +207,7 @@ class LessonplanCreateView(PermissionRequiredMixin, CreateView):
 
 class LessonplanUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'lessonplans.view_lessonplan'
-    template_name = 'lessonplans/lessonplan_create.html'
+    template_name = 'lessonplans/lesson/lessonplan_create.html'
     form_class = LessonPlanForm
 
     def get_object(self):
@@ -223,7 +223,7 @@ class LessonplanUpdateView(PermissionRequiredMixin, UpdateView):
 # My First Class Based Template View
 class IndexView(LoginRequiredMixin, TemplateView):
     login_url = '/admin/login/'
-    template_name = "lessonplans/lesson_plan.html"
+    template_name = "lessonplans/lesson/lesson_plan.html"
 
     def get_context_data(self, **kwargs):
         # super() = Function used to give access to the methods of a parent class.
