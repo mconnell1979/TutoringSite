@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'hackablesheets.apps.HackablesheetsConfig',
     'students.apps.StudentsConfig',
     'lessonplans.apps.LessonplansConfig',
+    'read_in_context.apps.ReadInContextConfig',
 ]
 
 MIDDLEWARE = [
