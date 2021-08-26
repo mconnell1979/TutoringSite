@@ -4,6 +4,8 @@ from django.db import models
 class HackableBook(models.Model):
     title = models.CharField(max_length=100, help_text="i.e. VC & CCV")
     orig_book = models.IntegerField(help_text="book #")
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s %s %s %s" % ('Book', self.orig_book, '-', self.title)
