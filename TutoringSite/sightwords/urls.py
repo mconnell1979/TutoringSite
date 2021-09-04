@@ -4,7 +4,9 @@ from . import views
 
 app_name = 'sightwords'
 urlpatterns = [
-    path('', views.SightwordIndexView.as_view(), name='SightwordsIndex'),
+    path('', views.SightWordIndexView.as_view(), name='Index'),
     path('SightWordSetList/<int:orig_set>', views.SightWordSetListView.as_view(), name='SetList'),
-    path('<int:id>/', views.SightwordDetailView.as_view(), name='Detail'),
+    path('<int:id>/', views.SightWordDetailView.as_view(), name='Detail'),
+    path('SightWordSentenceList/', views.SightWordSentenceIndexView.as_view(), name='SentenceIndex'),
+    path('SightWordSentenceList/Sentences/<int:pk>', views.SightWordSentenceView.as_view(), name='Sentences'),
 ]

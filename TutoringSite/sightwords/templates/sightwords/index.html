@@ -7,7 +7,7 @@
 
 <div class="list-group">
     {% for word in words %}
-    <a href="SightWordSetList/{{word.orig_set}}" class="list-group-item list-group-item-action">
+    <a href="{% url 'sightwords:SetList' word.orig_set %}" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">Set {{ word.orig_set }}</h5>
             <small>{{ word.id }}</small>

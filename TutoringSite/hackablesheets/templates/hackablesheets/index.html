@@ -15,11 +15,11 @@
                     <p class="card-text">
                         {{ book.title }}
                     </p>
-                    <a href="{% url 'hackablesheets:HackableWordSheetIndex' book.orig_book %}"
+                    <a href="{% url 'hackablesheets:SheetIndex' book.orig_book %}"
                        class="btn btn-outline-primary btn-sm">
                         Hackables
                     </a>
-                    <a href="{% url 'hackablesheets:HackableSentenceSheetIndex' book.orig_book %}"
+                    <a href="{% url 'hackablesheets:SentenceSheetIndex' book.orig_book %}"
                        class="btn btn-outline-primary btn-sm">
                         Sentences
                     </a>

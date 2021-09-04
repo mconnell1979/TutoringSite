@@ -4,7 +4,7 @@ from import_export.admin import ImportExportModelAdmin
 
 
 class SRABookAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title')
+    list_display = ('title', 'created')
 
 
 class SRAPassageAdmin(ImportExportModelAdmin):

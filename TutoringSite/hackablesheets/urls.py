@@ -4,15 +4,15 @@ from . import views
 
 app_name = 'hackablesheets'
 urlpatterns = [
-    path('', views.HackableBookIndexView.as_view(), name='HackableBookIndex'),
+    path('', views.HackableBookIndexView.as_view(), name='BookIndex'),
     path('WordSheetList/<int:orig_book>', views.HackableWordSheetIndexView.as_view(),
-         name='HackableWordSheetIndex'),
+         name='SheetIndex'),
     path('WordSheet/<int:pk>', views.HackableWordSheetDetailView.as_view(),
-         name='HackableWordSheet'),
+         name='Sheet'),
     path('Word/<int:pk>/<int:wordnum>/<str:hackword>', views.HackableWordDetailView.as_view(),
          name='HackableWord'),
     path('SentenceSheetList/<int:orig_book>', views.HackableSentenceSheetIndexView.as_view(),
-         name='HackableSentenceSheetIndex'),
+         name='SentenceSheetIndex'),
     path('SentenceSheet/<int:pk>', views.HackableSentenceSheetDetailView.as_view(),
          name='HackableSentenceSheet'),
     path('Sentence/<int:pk>/<int:sentencenum>/<str:sentence>', views.HackableSentenceDetailView.as_view(),

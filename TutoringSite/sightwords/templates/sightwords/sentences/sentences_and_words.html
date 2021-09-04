@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} SightWord Sent - {{ obj_sentence.id }} {% endblock %}
+
+{% block content %}
+<a class="icon-chevron-sign-up" href="{% url 'sightwords:SentenceIndex' %}" style="font-size:48px;color:#5555"
+    role="button"></a>
+<div class="container">
+    <div class="row">
+        <div class="row no-gutters">
+            <div class="col-6">
+                <div class="d-flex flex-row flex-wrap">
+                    {% for word in sight_words %}
+                    <a href="{% url 'sightwords:SentenceIndex' %}" class="list-group-item list-group-item-action">
+                        <span class="badge badge-light">{{ forloop.counter }} </span>  {{ word.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>
+    {{ obj_sentence.sentences }}
+</h3>
+{% endblock %}

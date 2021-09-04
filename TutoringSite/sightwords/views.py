@@ -3,10 +3,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render, get_object_or_404
-from .models import SightWord
+from .models import SightWord, SightWordSentences
 
 
-class SightwordIndexView(PermissionRequiredMixin, ListView):
+class SightWordIndexView(PermissionRequiredMixin, ListView):
     permission_required = 'sightwords.view_sightword'
     template_name = "sightwords/index.html"
     model = SightWord
@@ -25,7 +25,6 @@ class SightWordSetListView(PermissionRequiredMixin, ListView):
     model = SightWord
     context_object_name = 'words'
 
-
     def get_queryset(self, *args, **kwargs):
         return SightWord.objects.filter(orig_set=self.kwargs.get('orig_set'))
 
@@ -35,7 +34,7 @@ class SightWordSetListView(PermissionRequiredMixin, ListView):
         return context
 
 
-class SightwordDetailView(PermissionRequiredMixin, DetailView):
+class SightWordDetailView(PermissionRequiredMixin, DetailView):
     permission_required = 'sightwords.view_sightword'
     template_name = "sightwords/detailview.html"
     context_object_name = 'words'
@@ -61,3 +60,29 @@ class SightwordDetailView(PermissionRequiredMixin, DetailView):
         context['ref_tab'] = True
         return context
 
+
+class SightWordSentenceIndexView(PermissionRequiredMixin, ListView):
+    permission_required = 'sightwords.view_sightwordsentences'
+    template_name = "sightwords/sentences/sentence_index.html"
+    model = SightWordSentences
+    context_object_name = 'sentences_obj'
+    queryset = SightWordSentences.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context['sight_word_list'] = self.model.objects.get(pk=self.kwargs.get('pk'))
+        context['ref_tab'] = True
+        return context
+
+
+class SightWordSentenceView(PermissionRequiredMixin, DetailView):
+    permission_required = 'sightwords.view_sightwordsentences'
+    template_name = "sightwords/sentences/sentences_and_words.html"
+    context_object_name = 'obj_sentence'
+    model = SightWordSentences
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sight_words'] = self.object.sight_word.all()
+        context['lessonplan_tab'] = True
+        return context

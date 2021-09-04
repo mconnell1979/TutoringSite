@@ -1,12 +1,13 @@
 from django.db import models
 
+
 class SRABook(models.Model):
     title = models.CharField(max_length=200, help_text="Getting the Main Idea")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "%s %s %s %s" % ('Book', self.orig_book, '-', self.title)
+        return str(self.title)
 
     def __repr__(self):
         return '{self.__class__.__name__}(id={self.id}, {self.orig_book}'.format(self=self)
