@@ -84,5 +84,25 @@ class SightWordSentenceView(PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sight_words'] = self.object.sight_word.all()
-        context['lessonplan_tab'] = True
+        context['ref_tab'] = True
+        return context
+
+
+class WordCardView(PermissionRequiredMixin, ListView):
+    permission_required = 'sightwords.view_sightwordsentences'
+    template_name = "sightwords/cardview.html"
+    model = SightWordSentences
+    paginate_by = 1
+    context_object_name = 'words'
+    # page_obj = Paginator.page(number=3)
+
+    def get_queryset(self):
+        sentenceobj = self.model.objects.get(pk=self.kwargs.get('pk'))
+        myquery = sentenceobj.sight_word.all()
+        return myquery
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['myobj'] = self.model.objects.get(pk=self.kwargs.get('pk'))
+        context['ref_tab'] = True
         return context
