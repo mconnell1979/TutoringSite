@@ -6,13 +6,13 @@
 <h1>Syllable Word Index</h1>
 
 <div class="list-group">
-    {% for word in words %}
-    <a href="SyllableWordBookList/{{word.orig_box}}/{{word.orig_book}}" class="list-group-item list-group-item-action">
+    {% for SRAPassage in SRAPassages %}
+    <a href="{% url 'read_in_context:SRAPassage' SRAPassage.id %}" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Box {{ word.orig_box }} Book {{ word.orig_book }}</h5>
-            <small>{{ word.id }}</small>
+            <h5 class="mb-1">{{ SRAPassage.book }} </h5>
+            <small>{{ SRAPassage.id }}</small>
         </div>
-        <p class="mb-1">Syllable Type: {{ word.type }}</p>
+        <p class="mb-1">Unit {{ SRAPassage.unit_num }}</p>
     </a>
     {% endfor %}
 </div>

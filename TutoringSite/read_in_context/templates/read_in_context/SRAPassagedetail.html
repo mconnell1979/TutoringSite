@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} SRAPassage - {{ SRAPassage.unit_num }} {% endblock %}
+
+{% block content %}
+<i class="icon-chevron-sign-up" onclick="javascript:history.go(-1);" style="font-size:48px;color:#5555"
+   role="button"></i>
+
+<h1>
+    {{ SRAPassage.passage }}
+</h1>
+
+<h3>
+    {{ SRAPassage.question }}
+</h3>
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefaultA">
+  <label class="form-check-label" for="flexCheckDefaultA">
+    {{ SRAPassage.choiceA }}
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefaultB">
+  <label class="form-check-label" for="flexCheckDefaultB">
+    {{ SRAPassage.choiceB }}
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefaultC">
+  <label class="form-check-label" for="flexCheckDefaultC">
+    {{ SRAPassage.choiceC }}
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefaultD">
+  <label class="form-check-label" for="flexCheckDefaultD">
+    {{ SRAPassage.choiceD }}
+  </label>
+</div>
+
+{% endblock %}
