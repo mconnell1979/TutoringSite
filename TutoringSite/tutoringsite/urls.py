@@ -24,4 +24,5 @@ urlpatterns = [
     path('syllablewords/', include('syllablewords.urls')),
     path('hackablesheets/', include('hackablesheets.urls')),
     path('lessonplans/', include('lessonplans.urls')),
+    path('read_in_context/', include('read_in_context.urls')),
 ]

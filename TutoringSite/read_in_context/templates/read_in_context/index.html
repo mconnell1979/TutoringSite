@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Syllable Words - Index {% endblock %}
+
+{% block content %}
+<h1>Syllable Word Index</h1>
+
+<div class="list-group">
+    {% for SRAPassage in SRAPassages %}
+    <a href="{% url 'read_in_context:SRAPassage' SRAPassage.id %}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ SRAPassage.book }} </h5>
+            <small>{{ SRAPassage.id }}</small>
+        </div>
+        <p class="mb-1">Unit {{ SRAPassage.unit_num }}</p>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
