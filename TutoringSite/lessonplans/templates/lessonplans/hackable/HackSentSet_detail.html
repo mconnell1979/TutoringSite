@@ -34,9 +34,7 @@
                     <a href="{% url 'lessonplans:hackable_sent_word' myobj sheet.id 8 sheet.hackable_sentence_set.word8  %}" class="list-group-item list-group-item-action">
                         <span class="badge badge-light">8</span> {{ sheet.hackable_sentence_set.word8 }}
                     </a>
-                    <a href="{% url 'lessonplans:hackable_sent_word' myobj sheet.id 9 sheet.hackable_sentence_set.word9  %}" class="list-group-item list-group-item-action">
-                        <span class="badge badge-light">9</span> {{ sheet.hackable_sentence_set.word9 }}
-                    </a>
+
                     <a href="{% url 'lessonplans:hackable_word' myobj sheet.id 10 sheet.hackable_sentence_set.word10  %}" class="list-group-item list-group-item-action">
                         <span class="badge badge-light">10</span> {{ sheet.hackable_sentence_set.word10 }}
                     </a>
@@ -46,16 +44,16 @@
     </div>
 </div>
 
-<h3>1. <a href="{% url 'lessonplans:hackable_sent' myobj sheet.id 1 sheet.hackable_sentence_set.sentence1  %}">
+<h3>1. <a href="#">
     {{ sheet.hackable_sentence_set.sentence1 }}
 </a> </h3>
-<h3>2. <a href="{% url 'lessonplans:hackable_sent' myobj sheet.id 2 sheet.hackable_sentence_set.sentence2  %}">
+<h3>2. <a href="#">
     {{ sheet.hackable_sentence_set.sentence2 }}
 </a> </h3>
-<h3>3. <a href="{% url 'lessonplans:hackable_sent' myobj sheet.id 3 sheet.hackable_sentence_set.sentence3  %}">
+<h3>3. <a href="#">
     {{ sheet.hackable_sentence_set.sentence3 }}
 </a> </h3>
-<h3>4. <a href="{% url 'lessonplans:hackable_sent' myobj sheet.id 4 sheet.hackable_sentence_set.sentence4  %}">
+<h3>4. <a href="#">
     {{ sheet.hackable_sentence_set.sentence4 }}
 </a> </h3>
 {% endblock %}
