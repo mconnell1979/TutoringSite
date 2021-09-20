@@ -106,8 +106,7 @@ class PersonalSightWordCardView(PermissionRequiredMixin, ListView):
     context_object_name = 'words'
 
     def get_queryset(self):
-        personal_words_obj = self.model.objects.get(pk=self.kwargs.get('pk'))
-        my_query = self.model.objects.filter(student=personal_words_obj.student.id)
+        my_query = self.model.objects.filter(student=self.kwargs.get('pk'))
         return my_query
 
     def get_context_data(self, **kwargs):
