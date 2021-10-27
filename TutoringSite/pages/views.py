@@ -14,3 +14,12 @@ class IndexView(TemplateView):
         context = {}
         context['home_tab'] = True
         return context
+
+
+class ContactView(TemplateView):
+    template_name = "pages/contact_us.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = {}
+        context['contact_tab'] = True
+        return context
