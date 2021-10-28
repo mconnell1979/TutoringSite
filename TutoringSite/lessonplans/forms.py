@@ -23,6 +23,7 @@ class LessonPlanForm(forms.ModelForm):
         ]
 
         widgets = {
+            'scheduled': widgets.DateTimeInput(attrs={'type': 'datetime-local'}),
             'sight_word_list': forms.SelectMultiple(attrs={'size': 15}),
             'syllable_word_list': forms.SelectMultiple(attrs={'size': 15}),
             'multisyllable_word_list': forms.SelectMultiple(attrs={'size': 15}),
@@ -31,7 +32,6 @@ class LessonPlanForm(forms.ModelForm):
             'hackable_sentence_set_list': forms.SelectMultiple(attrs={'size': 5}),
             'air_write_words': forms.Textarea(attrs={'class': 'textarea', 'rows': 2, 'placeholder': 'word_1, word_2, etc...'}),
             'note': forms.Textarea(attrs={'class': 'textarea', 'rows': 6, 'placeholder': 'notes...'}),
-            'scheduled': widgets.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
 
 # class LessonPlanForm(forms.Form):
