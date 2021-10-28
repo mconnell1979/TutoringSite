@@ -5,12 +5,13 @@
 {% block content %}
 <h1>Lesson Plan Create</h1>
 <form method="POST"> {% csrf_token %}
+
     <p>
         <label>Student</label>
         {{ form.student }}
         <label>Tutor</label>
         {{ form.tutor }}
-        <label>Time</label>
+        <label>Date</label>
         {{ form.scheduled }}
     </p>
     <div>
@@ -39,7 +40,6 @@
         <label>Notes</label>
         {{ form.note }}
     </p>
-
 
     <input type='submit' value='Save'/>
 </form>

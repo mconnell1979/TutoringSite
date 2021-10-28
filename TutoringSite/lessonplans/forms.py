@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import widgets
 from .models import LessonPlan
 
 
@@ -7,6 +7,7 @@ class LessonPlanForm(forms.ModelForm):
     class Meta:
         model = LessonPlan
         fields = [
+            'scheduled',
             'student',
             'tutor',
             'scheduled',
@@ -30,6 +31,7 @@ class LessonPlanForm(forms.ModelForm):
             'hackable_sentence_set_list': forms.SelectMultiple(attrs={'size': 5}),
             'air_write_words': forms.Textarea(attrs={'class': 'textarea', 'rows': 2, 'placeholder': 'word_1, word_2, etc...'}),
             'note': forms.Textarea(attrs={'class': 'textarea', 'rows': 6, 'placeholder': 'notes...'}),
+            'scheduled': widgets.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
 
 # class LessonPlanForm(forms.Form):
