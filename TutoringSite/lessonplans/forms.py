@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import widgets
 from .models import LessonPlan
 
 
@@ -7,6 +7,7 @@ class LessonPlanForm(forms.ModelForm):
     class Meta:
         model = LessonPlan
         fields = [
+            'scheduled',
             'student',
             'tutor',
             'scheduled',
@@ -22,6 +23,7 @@ class LessonPlanForm(forms.ModelForm):
         ]
 
         widgets = {
+            'scheduled': widgets.DateTimeInput(attrs={'type': 'datetime-local'}),
             'sight_word_list': forms.SelectMultiple(attrs={'size': 15}),
             'syllable_word_list': forms.SelectMultiple(attrs={'size': 15}),
             'multisyllable_word_list': forms.SelectMultiple(attrs={'size': 15}),

@@ -3,45 +3,100 @@
 {% block title %} Lessons - Create {% endblock %}
 
 {% block content %}
-<h1>Lesson Plan Create</h1>
+<div class="container">
+        <div class="row">
+            <div class="col-lg">
+                <h1>Lesson Plan Create</h1>
+            </div>
+        </div>
+</div>
+
+<br>
+
 <form method="POST"> {% csrf_token %}
-    <p>
-        <label>Student</label>
-        {{ form.student }}
-        <label>Tutor</label>
-        {{ form.tutor }}
-        <label>Time</label>
-        {{ form.scheduled }}
-    </p>
-    <div>
-        <label>Sight Words</label>
-        {{ form.sight_word_list }}
-        <label>Syllable Words</label>
-        {{ form.syllable_word_list }}
-        <label>Multi Syllable Words</label>
-        {{ form.multisyllable_word_list }}
-        <label>Affixes</label>
-        {{ form.affix_word_list }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <label>Student</label>
+                {{ form.student }}
+            </div>
+            <div class="col-sm">
+                <label>Tutor</label>
+                {{ form.tutor }}
+            </div>
+            <div class="col-sm">
+            <label>Date</label>
+            {{ form.scheduled }}
+            </div>
+        </div>
     </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <label>Sight Words</label><br>
+                {{ form.sight_word_list }}
+            </div>
 
-    <div>
-        <label>Hackables</label>
-        {{ form.hackable_word_set_list }}
-        <label>Sentences</label>
-        {{ form.hackable_sentence_set_list }}
+            <div class="col-sm">
+                <label>Syllable Words</label><br>
+                {{ form.syllable_word_list }}
+            </div>
+
+            <div class="col-sm">
+                <label>Multi Syllable Words</label><br>
+                {{ form.multisyllable_word_list }}
+            </div>
+
+            <div class="col-sm">
+                <label>Affixes</label><br>
+                {{ form.affix_word_list }}
+            </div>
+
+        </div>
     </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <label>Hackables</label><br>
+                {{ form.hackable_word_set_list }}
+            </div>
 
-    <p>
-        <label>Air Write Words</label>
-        {{ form.air_write_words }}
-    </p>
-    <p>
-        <label>Notes</label>
-        {{ form.note }}
-    </p>
-
-
-    <input type='submit' value='Save'/>
+            <div class="col-sm">
+                <label>Sentences</label><br>
+                {{ form.hackable_sentence_set_list }}
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <label>Air Write Words</label><br>
+                {{ form.air_write_words }}
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <label>Notes</label><br>
+                {{ form.note }}
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <input type='submit' value='Save'/>
+            </div>
+        </div>
+    </div>
+    <br>
 </form>
 
 {% endblock %}

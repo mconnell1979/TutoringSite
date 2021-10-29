@@ -14,9 +14,10 @@ class LessonIndexView(PermissionRequiredMixin, ListView):
     template_name = "lessonplans/index.html"
     model = LessonPlan
     context_object_name = 'lessons'
+    paginate_by = 15
 
     def get_queryset(self):
-        return self.model.objects.all()
+        return self.model.objects.all().order_by('-pk')
 
     def get_context_data(self, **kwargs):
         # using super() calls the parent function just like it would anyway
@@ -34,7 +35,7 @@ class LessonTutorIndexView(PermissionRequiredMixin, ListView):
     context_object_name = 'lessons'
 
     def get_queryset(self):
-        return self.model.objects.filter(tutor=self.request.user)
+        return self.model.objects.filter(tutor=self.request.user).order_by('-pk')
 
     def get_context_data(self, **kwargs):
         # using super() calls the parent function just like it would anyway
