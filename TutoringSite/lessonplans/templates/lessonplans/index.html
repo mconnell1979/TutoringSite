@@ -3,35 +3,40 @@
 {% block title %} Lesson Plan - Index {% endblock %}
 
 {% block content %}
-<h1>Lessons Index</h1>
+<h3>Lessons Index</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Lesson</th>
+      <th scope="col">Tutor</th>
+      <th scope="col">Student</th>
+      <th scope="col">Scheduled</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for lesson in lessons %}
+    <tr>
+      <th scope="row"><a href="{% url 'lessonplans:Update' lesson.id %}">{{ lesson.id }}</a></th>
+      <td>{{ lesson.tutor }}</td>
+      <td>{{ lesson.student.first_name }} {{ lesson.student.last_name }} ({{ lesson.student.id }})</td>
+      <td>{{ lesson.scheduled }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
 
 <div class="container">
-    <div class="row">
-        {% for lesson in lessons %}
-        <div class="col-lg-6 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Student({{ lesson.student.id }}): {{ lesson.student.first_name }}
-                        {{ lesson.student.last_name }}</h5>
-                    <p class="card-text">
-                        Tutor: {{ lesson.tutor }}
-                    </p>
-                    <p class="card-text">
-                        Scheduled: {{ lesson.scheduled }}
-                    </p>
-                    <a href="#"
-                       class="btn btn-outline-primary btn-sm">
-                        Summary
-                    </a>
-                    <a href="{% url 'lessonplans:Update' lesson.id %}"
-                       class="btn btn-outline-primary btn-sm">
-                        Lesson {{ lesson.id }}
-                    </a>
-                </div>
+        <div class="row">
+            <div class="col-lg">
+              <button type="button" class="btn btn-primary btn-lg">Previous</button>
+            </div>
+            <div class="col-lg">
+              <button type="button" class="btn btn-primary btn-lg">Next</button>
             </div>
         </div>
-        {% endfor %}
-    </div>
 </div>
+<br>
 {% endblock %}
 
