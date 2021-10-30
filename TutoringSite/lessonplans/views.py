@@ -14,7 +14,7 @@ class LessonIndexView(PermissionRequiredMixin, ListView):
     template_name = "lessonplans/index.html"
     model = LessonPlan
     context_object_name = 'lessons'
-    paginate_by = 15
+    paginate_by = 1
 
     def get_queryset(self):
         return self.model.objects.all().order_by('-pk')
@@ -257,7 +257,10 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
 @csrf_exempt
 def update_grade(request):
+    print("oh Yeah!!!!")
     if request.method =="POST":
+        print("foo bar")
+        print(request)
         return JsonResponse({'foo': 'bar'})
     else:
         return JsonResponse({"error": "Expected POST"})
