@@ -2,109 +2,14 @@
 {% load static %}
 
 <html lang="en">
+    <head>
+        {% include 'head.html' %}
+    </head>
 
-<head>
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-          content="{% block meta_description %} Tutoring Online - Specializing in Reading for Dyslexia {% endblock %}">
-    <title> {% block title %} Tutoring Site {% endblock %} </title>
+    {% include 'navbar.html' %}
 
-    <!-- Font Awesome -->
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-
-    <!-- jQuery library -->
-    <script src="{% static 'jq/jquery.js' %}"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-
-    {% block extra_js %}
-    {% endblock %}
-</head>
-
-<!-- Navbar content -->
-<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item {{ home_tab|yesno:'active,' }}">
-            <a class="navbar-brand" href="/">
-                <img src="{% static 'images/ConnellSimpleLogo.svg' %}" width="30" height="30" alt="">
-            </a>
-        </li>
-        <li><a class="nav-link" href="/">Connell Reading Center</a></li>
-
-        {% if user.is_authenticated %}
-            <li class="nav-item {{ lessonplan_tab|yesno:'active,' }}">
-                <a class="nav-link" href="{% url 'lessonplans:LessonPlanTutorIndex' %}">Lessons</a>
-            </li>
-            <li class="nav-item dropdown {{ ref_tab|yesno:'active,' }}">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Ref Docs
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                    <a class="dropdown-item" href="{% url 'sightwords:Index' %}">Sight Words</a>
-                    <a class="dropdown-item" href="{% url 'sightwords:SentenceIndex' %}">Sight Word Sentences</a>
-                    <a class="dropdown-item" href="{% url 'syllablewords:Index' %}">Syllable Words</a>
-                    <a class="dropdown-item" href="{% url 'read_in_context:Index' %}">Reading In Context</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'hackablesheets:BookIndex' %}">Hackable Sheets</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown {{ planning_tab|yesno:'active,' }}">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Planning
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                    <a class="dropdown-item" href="{% url 'lessonplans:Index' %}">List All</a>
-                    <a class="dropdown-item" href="{% url 'lessonplans:Index' %}">List Active</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'lessonplans:LessonPlanCreate' %}">Create</a>
-                </div>
-            </li>
-        {% else %}
-        <li> <a class="nav-link" href="/">About</a> </li>
-        <li class="nav-item {{ contact_tab|yesno:'active,' }}"> <a class="nav-link" href="{% url 'pages:contact' %}">Contact</a> </li>
-        <li> <a class="nav-link" href="/">Work-With-Us</a> </li>
-
-        {% endif %}
-    </ul>
-
-    <div class="flex-grow-1"></div>
-    <ul class="navbar-nav mr-auto">
-        <li>
-            {% if user.is_authenticated %}
-                <a class="nav-link" href="/logout"> {{request.user.username}} </a>
-            {% else %}
-                <a class="nav-link" href="/login"> LOGIN </a>
-            {% endif %}
-        </li>
-    </ul>
-</nav>
-
-<body>
-
-{% block content %}
-{% endblock %}
-
-
-</body>
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
 </html>

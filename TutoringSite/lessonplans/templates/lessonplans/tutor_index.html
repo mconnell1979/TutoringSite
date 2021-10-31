@@ -19,13 +19,9 @@
                     <p class="card-text">
                         Scheduled: {{ lesson.scheduled }}
                     </p>
-                    <a href="#"
-                       class="btn btn-outline-primary btn-sm">
-                        Summary
-                    </a>
                     <a href="{% url 'lessonplans:detail' lesson.id %}"
                        class="btn btn-outline-primary btn-sm">
-                        Lesson {{ lesson.id }}
+                        Start Lesson {{ lesson.id }}
                     </a>
                 </div>
             </div>

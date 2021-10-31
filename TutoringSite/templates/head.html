@@ -1,0 +1,34 @@
+{% load static %}
+<link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description"
+      content="{% block meta_description %} Tutoring Online - Specializing in Reading for Dyslexia {% endblock %}">
+<title> {% block title %} Tutoring Site {% endblock %} </title>
+
+<!-- Font Awesome -->
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+<!-- jQuery library -->
+<script src="{% static 'jq/jquery.js' %}"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<!-- Optional JavaScript; choose one of the two! -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+{% block extra_js %}
+{% endblock %}
