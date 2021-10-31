@@ -14,7 +14,7 @@ class LessonIndexView(PermissionRequiredMixin, ListView):
     template_name = "lessonplans/index.html"
     model = LessonPlan
     context_object_name = 'lessons'
-    paginate_by = 15
+    paginate_by = 50
 
     def get_queryset(self):
         return self.model.objects.all().order_by('-pk')
@@ -147,7 +147,8 @@ class LessonplanHackWordDetailView(PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['wordnum'] = self.kwargs.get("wordnum")
-        context['hackword'] = self.kwargs.get("hackword")
+        context['word'] = self.kwargs.get("word")
+        print("this is it!!")
         context['myobj'] = self.kwargs.get('lesson_id')
         context['lessonplan_tab'] = True
         return context
@@ -186,7 +187,7 @@ class LessonplanHackSentDetailView(PermissionRequiredMixin, DetailView):
 class LessonplanHackSentWordDetailView(PermissionRequiredMixin, DetailView):
     login_url = '/login/'
     permission_required = 'lessonplans.view_lessonplan'
-    template_name = "lessonplans/hackable/hacksentword_detail.html"
+    template_name = "lessonplans/hackable/hackword_detail.html"
     context_object_name = 'sheet'
     model = LessonHackableSentenceSetList
 
@@ -257,7 +258,10 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
 @csrf_exempt
 def update_grade(request):
+    print("oh Yeah!!!!")
     if request.method =="POST":
+        print("foo bar")
+        print(request)
         return JsonResponse({'foo': 'bar'})
     else:
         return JsonResponse({"error": "Expected POST"})

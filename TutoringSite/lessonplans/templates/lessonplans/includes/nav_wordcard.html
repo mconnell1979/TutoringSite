@@ -1,0 +1,32 @@
+<!-- This is Just Displaying the Word In Paginating Lists -->
+<!-- This html is included somewhere else -->
+<div class="d-flex flex-column">
+    <div>
+        <a class="icon-chevron-sign-up" href="{% url 'lessonplans:detail' myobj.id %}" style="font-size:48px;color:#5555"
+        role="button"></a>
+
+        <a class="icon-camera-retro" style="font-size:48px;color:#5555;" data-toggle="button" aria-pressed="false"
+        autocomplete="off"
+        onclick="changeVisibility()">
+        </a>
+
+        {% if page_obj.has_previous %}
+        <a class="icon-chevron-sign-left" href="?page={{ page_obj.previous_page_number }}" style="font-size:48px;color:#5555"
+        role="button"></a>
+        {% else %}
+        <a class="icon-chevron-sign-left" href="#" style="font-size:48px;color:#5555"
+        role="button"></a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+        <a class="icon-chevron-sign-right" href="?page={{ page_obj.next_page_number }}" style="font-size:48px;color:#5555"
+        role="button"></a>
+        {% else %}
+        <a class="icon-chevron-sign-right" href="#" style="font-size:48px;color:#5555"
+        role="button"></a>
+        {% endif %}
+
+        {{ page_obj.number }} of {{ paginator.num_pages }}
+    </div>
+</div>
+<br>

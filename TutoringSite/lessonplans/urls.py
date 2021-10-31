@@ -14,7 +14,7 @@ urlpatterns = [
     path('<int:pk>/<str:wordtype>/word_card/', views.WordCardView.as_view(), name='card'),
     path('<int:lesson_id>/sight_words/<int:pk>/', views.PersonalSightWordCardView.as_view(), name='sight_words'),
     path('<int:lesson_id>/hack_words/<int:pk>/', views.LessonplanHackSetDetailView.as_view(), name='hack_words'),
-    path('<int:lesson_id>/hack_words/<int:pk>/<int:wordnum>/<str:hackword>',
+    path('<int:lesson_id>/hack_words/<int:pk>/<int:wordnum>/<str:word>',
          views.LessonplanHackWordDetailView.as_view(), name='hackable_word'),
     path('<int:lesson_id>/hack_sent_set/<int:pk>/', views.LessonplanHackSentSetDetailView.as_view(), name='hacksent_set'),
     path('<int:lesson_id>/hack_sent/<int:pk>/<int:sentencenum>/<str:sentence>',

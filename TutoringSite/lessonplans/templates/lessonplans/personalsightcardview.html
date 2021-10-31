@@ -4,6 +4,7 @@
 
 {% block extra_js %}
 <script src="{% static 'js/sightworddetail.js' %}"></script>
+<script src="{% static 'js/lessonplans.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -34,8 +35,12 @@
 
 {{ page_obj.number }} of {{ paginator.num_pages }}
 
-<div class="carousel-inner" id="mainWord">
-    <p class="text-center" style="font-size:14rem;"> {{ words.0.sight_word.name }} </p>
+<div class="container">
+    <div class="flex-grow-1" id="mainWord">
+      <h1 class="display-1 text-center" style="font-size:12rem">
+        {{ words.0.sight_word.name }}
+      </h1>
+    </div>
 </div>
 
 {% endblock %}
