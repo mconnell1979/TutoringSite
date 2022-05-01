@@ -111,6 +111,7 @@
                     <h5 class="card-title">Hackable Sheets</h5>
                     <p class="card-text">
                         Hackables
+                    </p>
                     <div>
                         {% for item in hackset_list %}
                         <a href="{% url 'lessonplans:hack_words' item.lesson_plan_id item.id %}"
@@ -119,8 +120,9 @@
                         </a>
                         {% endfor %}
                     </div>
-                    </p>
+                    <p>
                     Sentences
+                    </p>
                     <div>
                         {% for item in hacksent_list %}
                         <a href="{% url 'lessonplans:hacksent_set' item.lesson_plan_id item.id %}"
@@ -133,16 +135,23 @@
             </div>
         </div>
 
+        {% if lesson.air_write_words != "" %}
         <div class="col-lg-6 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Air Write Words</h5>
-                    <p class="card-text">
-                        {{lesson.air_write_words}}
-                    </p>
+                    <button class="btn btn-outline-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseAirWriteWords" aria-expanded="false" aria-controls="collapseExample">
+                        Air Write Words
+                    </button>
+                    <br>
+                    <div class="collapse" id="collapseAirWriteWords">
+                        <p class="card-text">
+                            {{lesson.air_write_words}}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+        {% endif %}
 
         {% if lesson.note != "" %}
         <div class="col-lg-6 mb-4">

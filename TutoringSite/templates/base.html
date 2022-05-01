@@ -4,9 +4,12 @@
 <html lang="en">
     <head>
         {% include 'head.html' %}
+
+        {% block extra_js %}
+        {% endblock %}
     </head>
 
-    {% include 'navbar.html' %}
+    {% include 'navbar_tutor.html' %}
 
     <body>
         {% block content %}
