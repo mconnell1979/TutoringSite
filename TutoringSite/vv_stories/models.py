@@ -22,6 +22,9 @@ class VVStory(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        unique_together = ('book', 'number',)
+
     def __str__(self):
         return "%s" "%s" "%s" "%s" "%s" "%s" % (self.book.title, ':', self.book.book, ' - ', self.number, self.title,)
 

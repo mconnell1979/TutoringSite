@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from lessonplans.models import LessonPlan, PersonalSightWord, LessonHackableWordSetList, LessonHackableSentenceSetList\
     , LessonVVStoryList
 # Is there a better way than importing VVStory?
-from .models import VVStoryBook, VVStory, VVStoryQuestion
+from vv_stories.models import VVStoryQuestion
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from lessonplans.forms import LessonPlanForm

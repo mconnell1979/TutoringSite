@@ -5,7 +5,7 @@ from students.models import Student
 from sightwords.models import SightWord
 from syllablewords.models import SyllableWord, MultiSyllableWord, Affix
 from hackablesheets.models import HackableWordSet, HackableSentenceSet
-from vv_stories.models import VVStory, VVStoryBook, VVStoryQuestion
+from vv_stories.models import VVStory
 from tutoringsite import choices
 
 
