@@ -11,6 +11,7 @@ class SRAPassageIndexView(PermissionRequiredMixin, ListView):
     model = SRAPassage
     context_object_name = 'SRAPassages'
     queryset = SRAPassage.objects.all()
+    print("SRA Passage View Trying")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

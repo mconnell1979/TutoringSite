@@ -21,5 +21,6 @@ urlpatterns = [
          views.LessonplanHackSentDetailView.as_view(), name='hackable_sent'),
     path('<int:lesson_id>/hack_sent_word/<int:pk>/<int:wordnum>/<str:word>',
          views.LessonplanHackSentWordDetailView.as_view(), name='hackable_sent_word'),
+    path('<int:lesson_id>/vv_story/<int:pk>/', views.LessonplanVVStoryDetailView.as_view(), name='vv_story'),
     path('grade', views.update_grade),
 ]

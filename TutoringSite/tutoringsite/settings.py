@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'students.apps.StudentsConfig',
     'lessonplans.apps.LessonplansConfig',
     'read_in_context.apps.ReadInContextConfig',
+    'vv_workbooks.apps.VvWorkbooksConfig',
+    'vv_stories.apps.VvStoriesConfig',
+    'vv_pictures.apps.VvPicturesConfig',
 ]
 
 MIDDLEWARE = [
@@ -140,13 +143,16 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#CSV Impor-Exprot Setings
+# CSV Import-Export Settings
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 IMPORT_EXPORT_SKIP_ADMIN_LOG = False
 

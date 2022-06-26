@@ -153,6 +153,24 @@
         </div>
         {% endif %}
 
+        {% if lesson.vv_story.count > 0 %}
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">VV Stories</h5>
+                    <div>
+                        {% for item in vv_story_list %}
+                        <a href="{% url 'lessonplans:vv_story' item.lesson_plan_id item.id %}"
+                           class="btn btn-outline-primary btn-sm">
+                            {{ item.vv_story.book.title }} - {{item.vv_story.title}}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
         {% if lesson.note != "" %}
         <div class="col-lg-6 mb-4">
             <div class="card">

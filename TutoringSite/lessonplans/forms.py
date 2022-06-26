@@ -19,6 +19,7 @@ class LessonPlanForm(forms.ModelForm):
             'hackable_word_set_list',
             'hackable_sentence_set_list',
             'air_write_words',
+            'vv_story',
             'note',
         ]
 
@@ -30,15 +31,17 @@ class LessonPlanForm(forms.ModelForm):
             'affix_word_list': forms.SelectMultiple(attrs={'size': 15}),
             'hackable_word_set_list': forms.SelectMultiple(attrs={'size': 5}),
             'hackable_sentence_set_list': forms.SelectMultiple(attrs={'size': 5}),
-            'air_write_words': forms.Textarea(attrs={'class': 'textarea', 'rows': 2, 'placeholder': 'word_1, word_2, etc...'}),
+            'air_write_words': forms.Textarea(attrs={'class': 'textarea', 'rows': 2, 'placeholder': 'word 1, word 2, etc...'}),
+            'vv_story': forms.SelectMultiple(attrs={'size': 5}),
             'note': forms.Textarea(attrs={'class': 'textarea', 'rows': 6, 'placeholder': 'notes...'}),
         }
 
+
 # class LessonPlanForm(forms.Form):
 #     model_choices = forms.ModelMultipleChoiceField(
-#         widget=forms.CheckboxSelectMultiple,
-#         queryset=LessonPlan.objects.all(),
-#         initial=0
-#     )
-#     sight_word_start = forms.IntegerField()
+#          widget=forms.CheckboxSelectMultiple,
+#          queryset=LessonPlan.objects.all(),
+#          initial=0
+#      )
+#      sight_word_start = forms.IntegerField()
 #     sight_word_end = forms.IntegerField()

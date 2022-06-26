@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+#imports for images:
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('pages.urls')),
@@ -25,4 +28,6 @@ urlpatterns = [
     path('hackablesheets/', include('hackablesheets.urls')),
     path('lessonplans/', include('lessonplans.urls')),
     path('read_in_context/', include('read_in_context.urls')),
-]
+    path('vv_stories/', include('vv_stories.urls')),
+    path('vv_pictures/', include('vv_pictures.urls')),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

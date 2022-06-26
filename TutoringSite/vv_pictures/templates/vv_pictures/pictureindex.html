@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Story List {% endblock %}
+
+{% block content %}
+<h1>{{ pictures.0.book.title }} -- {{ pictures.0.book.book }}</h1>
+
+<div class="list-group">
+    {% for picture in pictures %}
+    <a href="{% url 'vv_pictures:Detail' picture.id %}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ picture.title }}</h5>
+            <small>{{ picture.id }}</small>
+        </div>
+        <p class="mb-1">{{ picture.book.title }} - {{ picture.book.book }}</p>
+        <small>Story # {{ picture.id }}</small>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Story Detail {% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/sightworddetail.js' %}"></script>
+
+
+{% endblock %}
+
+{% block content %}
+
+
+<a class="icon-camera-retro" style="font-size:48px;color:#5555;" data-toggle="button" aria-pressed="false"
+   onclick="changeVisibility()">
+</a>
+<a class="icon-chevron-sign-up" href="javascript:history.back()" style="font-size:48px;color:#5555"
+   role="button"> </a>
+<a class="icon-chevron-sign-right" onclick="showNextSentence();" style="font-size:48px;color:#5555"
+   role="button"> </a>
+
+
+<div class="d-grid gap-3">
+    <h1>{{ story.title }}</h1>
+    <div id="mainWord" class="p-2 bg-light border">
+        {% for sentence in sentences %}
+            <span {% if not forloop.first %}style="display:none;font-size:2rem" {% else %} style="font-size:2rem" {% endif %} id="sentence-{{ forloop.counter }}" >{{ sentence }}{% if not forloop.last %}.{% endif %}</span>
+        {% endfor %}
+    </div>
+</div>
+<br>
+{% for question in questions %}
+
+    <button type="button" class="btn btn-light" data-bs-toggle="popover" title="#{{ forloop.counter }}" data-bs-content="{{ question.question }}">Question #{{ forloop.counter }}</button>
+    <br>
+{% endfor %}
+
+
+
+{% endblock %}

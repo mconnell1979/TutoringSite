@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Imagine That! Stories - Index {% endblock %}
+
+{% block content %}
+<h1>Imagine That! Stories - Book Index</h1>
+
+<div class="list-group">
+    {% for book in books %}
+    <a href="{% url 'vv_stories:StoryIndex' book.id %}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ book.title }}</h5>
+            <small>{{ book.id }}</small>
+        </div>
+        <p class="mb-1">{{ book.book }}</p>
+        <small>Sheet {{ book.created }}</small>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
+

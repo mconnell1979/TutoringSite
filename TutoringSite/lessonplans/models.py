@@ -5,6 +5,7 @@ from students.models import Student
 from sightwords.models import SightWord
 from syllablewords.models import SyllableWord, MultiSyllableWord, Affix
 from hackablesheets.models import HackableWordSet, HackableSentenceSet
+from vv_stories.models import VVStory, VVStoryBook, VVStoryQuestion
 from tutoringsite import choices
 
 
@@ -25,6 +26,7 @@ class LessonPlan(models.Model):
     hackable_sentence_set_list = models.ManyToManyField(HackableSentenceSet, blank=True,
                                                         through='LessonHackableSentenceSetList')
     air_write_words = models.TextField(max_length=200, blank=True, help_text="max 200 characters")
+    vv_story = models.ManyToManyField(VVStory, blank=True, through='LessonVVStoryList')
     note = models.TextField(max_length=1000, blank=True, help_text="Notes for the tutor - Max 1000 characters")
 
     def __str__(self):
@@ -56,6 +58,7 @@ class PersonalSightWord(models.Model):
         return '{self.__class__.__name__}(id={self.id}, {self.student}, {self.sight_word})'.format(self=self)
 
 
+# Through Table - Lesson To Sight Word
 class LessonSightWordList(models.Model):
     sight_word = models.ForeignKey(SightWord, on_delete=models.CASCADE)
     lesson_plan = models.ForeignKey(LessonPlan, on_delete=models.CASCADE)
@@ -75,6 +78,7 @@ class LessonSightWordList(models.Model):
                '{self.lesson_plan.id})'.format(self=self)
 
 
+# Through Table - Lesson To Syllable Word
 class LessonSyllableWordList(models.Model):
     syllable_word = models.ForeignKey(SyllableWord, on_delete=models.CASCADE)
     lesson_plan = models.ForeignKey(LessonPlan, on_delete=models.CASCADE)
@@ -89,6 +93,7 @@ class LessonSyllableWordList(models.Model):
         return str(self.syllable_word)
 
 
+# Through Table - Lesson To Multi-Syllable Word
 class LessonMultiSyllableWordList(models.Model):
     multisyllable_word = models.ForeignKey(MultiSyllableWord, on_delete=models.CASCADE)
     lesson_plan = models.ForeignKey(LessonPlan, on_delete=models.CASCADE)
@@ -103,6 +108,7 @@ class LessonMultiSyllableWordList(models.Model):
         return str(self.multisyllable_word)
 
 
+# Through Table - Lesson To Affix Word
 class LessonAffixWordList(models.Model):
     affix_word = models.ForeignKey(Affix, on_delete=models.CASCADE)
     lesson_plan = models.ForeignKey(LessonPlan, on_delete=models.CASCADE)
@@ -117,6 +123,7 @@ class LessonAffixWordList(models.Model):
         return str(self.affix_word)
 
 
+# Through Table - Lesson To Hackable Word Sheet
 class LessonHackableWordSetList(models.Model):
     hackable_word_set = models.ForeignKey(HackableWordSet, on_delete=models.CASCADE)
     lesson_plan = models.ForeignKey(LessonPlan, on_delete=models.CASCADE)
@@ -134,6 +141,7 @@ class LessonHackableWordSetList(models.Model):
         return '{self.__class__.__name__}(id={self.id}, {self.hackable_word_set}, {self.lesson_plan},'.format(self=self)
 
 
+# Through Table - Lesson To Hackable Sentence Sheet
 class LessonHackableSentenceSetList(models.Model):
     hackable_sentence_set = models.ForeignKey(HackableSentenceSet, on_delete=models.CASCADE)
     lesson_plan = models.ForeignKey(LessonPlan, on_delete=models.CASCADE)
@@ -146,3 +154,21 @@ class LessonHackableSentenceSetList(models.Model):
 
     def __str__(self):
         return str(self.hackable_sentence_set)
+
+
+# Through Table - Lesson To VV Story
+class LessonVVStoryList(models.Model):
+    vv_story = models.ForeignKey(VVStory, on_delete=models.CASCADE)
+    lesson_plan = models.ForeignKey(LessonPlan, on_delete=models.CASCADE)
+    active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = [['vv_story', 'lesson_plan']]
+
+    def __str__(self):
+        return str(self.vv_story)
+
+    def __repr__(self):
+        return '{self.__class__.__name__}(id={self.id}, {self.vv_story}, {self.lesson_plan},'.format(self=self)

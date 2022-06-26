@@ -1,7 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from lessonplans.models import LessonPlan, PersonalSightWord, LessonHackableWordSetList, LessonHackableSentenceSetList
+from lessonplans.models import LessonPlan, PersonalSightWord, LessonHackableWordSetList, LessonHackableSentenceSetList\
+    , LessonVVStoryList
+# Is there a better way than importing VVStory?
+from .models import VVStoryBook, VVStory, VVStoryQuestion
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from lessonplans.forms import LessonPlanForm
@@ -64,6 +67,7 @@ class LessonplanDetailView(PermissionRequiredMixin, DetailView):
         context['hackable_sentence_set_list'] = self.object.hackable_sentence_set_list.all()
         context['hackset_list'] = self.object.hackable_word_set_list.through.objects.filter(lesson_plan=self.object)
         context['hacksent_list'] = self.object.hackable_sentence_set_list.through.objects.filter(lesson_plan=self.object)
+        context['vv_story_list'] = self.object.vv_story.through.objects.filter(lesson_plan=self.object)
         context['lessonplan_tab'] = True
         return context
 
@@ -195,6 +199,23 @@ class LessonplanHackSentWordDetailView(PermissionRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['wordnum'] = self.kwargs.get("wordnum")
         context['word'] = self.kwargs.get("word")
+        context['myobj'] = self.kwargs.get('lesson_id')
+        context['lessonplan_tab'] = True
+        return context
+
+
+class LessonplanVVStoryDetailView(PermissionRequiredMixin, DetailView):
+    login_url = '/login/'
+    permission_required = 'lessonplans.view_lessonplan'
+    template_name = "lessonplans/storydetail.html"
+    context_object_name = 'sheet'
+    model = LessonVVStoryList
+
+    # Note: personalizing the context data allows you to get more organized context and other object data.? \()/
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sentences'] = str(self.object.vv_story.story).split(".")
+        context['questions'] = VVStoryQuestion.objects.filter(story=self.object.vv_story_id)
         context['myobj'] = self.kwargs.get('lesson_id')
         context['lessonplan_tab'] = True
         return context

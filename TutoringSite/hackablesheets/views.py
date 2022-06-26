@@ -24,6 +24,7 @@ class HackableWordSheetIndexView(PermissionRequiredMixin, ListView):
     context_object_name = 'sheets'
 
     def get_queryset(self, *args, **kwargs):
+        # print(HackableWordSet.objects.filter(book__orig_book=self.kwargs.get('orig_book')))
         return HackableWordSet.objects.filter(book__orig_book=self.kwargs.get('orig_book'))
 
     def get_context_data(self, **kwargs):
