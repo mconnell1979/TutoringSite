@@ -19,6 +19,23 @@ class VVStory(models.Model):
     book = models.ForeignKey(VVStoryBook, on_delete=models.CASCADE)
     number = models.IntegerField(help_text="Story #")
     story = models.TextField(help_text="Write story here.")
+    SENTENCE_BY_SENTENCE = 'SentBySent'
+    MULTIPLE_SENTENCE = 'MultiSent'
+    WHOLE_PARAGRAPH = 'WholePara'
+    PARAGRAPH_BY_PARAGRAPH = 'Para'
+    CUSTOM = 'CustomType'
+    STORY_TYPE_CHOICES = [
+        (SENTENCE_BY_SENTENCE, 'Sentence by Sentence'),
+        (MULTIPLE_SENTENCE, 'Multiple Sentence'),
+        (WHOLE_PARAGRAPH, 'Whole Paragraph'),
+        (PARAGRAPH_BY_PARAGRAPH, 'Paragraph by Paragraph'),
+        (CUSTOM, 'Custom'),
+    ]
+    story_type = models.CharField(
+        max_length=10,
+        choices=STORY_TYPE_CHOICES,
+        default=SENTENCE_BY_SENTENCE,
+    )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
