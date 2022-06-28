@@ -30,4 +30,4 @@ urlpatterns = [
     path('read_in_context/', include('read_in_context.urls')),
     path('vv_stories/', include('vv_stories.urls')),
     path('vv_pictures/', include('vv_pictures.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
