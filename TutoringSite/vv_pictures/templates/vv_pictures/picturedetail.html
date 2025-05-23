@@ -1,30 +1,35 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %} Picture Detail {% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+}
 
-{% block extra_js %}
+.bg {
+  /* The image used */
+  background-image: url("{{picture.image.url}}");
 
-<script src="{% static 'js/sightworddetail.js' %}"></script>
+  /* Full height */
+  height: 100%;
 
-{% endblock %}
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+</head>
+<body>
 
-{% block content %}
-
-<a class="icon-camera-retro" style="font-size:48px;color:#5555;" data-toggle="button" aria-pressed="false"
-   onclick="changeVisibility()">
-</a>
-<a class="icon-chevron-sign-up" href="javascript:history.back()" style="font-size:48px;color:#5555"
-   role="button"> </a>
-<a class="icon-chevron-sign-right" onclick="showNextSentence();" style="font-size:48px;color:#5555"
-   role="button"> </a>
-
-
-<div class="d-grid gap-3">
-    <div id="mainWord" class="p-2 bg-light border">
-        <h1>{{ picture.title }}</h1>
-        <img src="{{picture.image.url}}" class="img-fluid" style="width:100%" alt="{{picture.title}}">
+<div class="bg">
+    <div>
+        <button onclick="history.back()">Go Back</button>
     </div>
 </div>
-<br>
 
-{% endblock %}
+
+</body>
+</html>
